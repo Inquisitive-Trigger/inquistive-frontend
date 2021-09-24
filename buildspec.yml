@@ -16,4 +16,4 @@ phases:
   build:
     commands:
       # Copy the content of build folder into website s3 bucket
-      - aws s3 sync build/ s3://$WEBSITE_S3_BUCKET/
+      - aws s3 sync build/ s3://inquisitive-trigger-frontend-bucket/
