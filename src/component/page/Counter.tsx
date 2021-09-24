@@ -1,4 +1,9 @@
 import * as React from 'react';
+import styled from 'styled-components'
+
+const StyledDiv = styled.div`
+  background-color: red;
+`
 
 type iCounter = {
   count: number
@@ -21,7 +26,7 @@ export const Counter: React.FC<iCounter> = ({
   const incrementValue = Number(incrementAmount) || 0
 
   return (
-    <div>
+    <StyledDiv>
       <div>
         <button
           aria-label="Decrement value"
@@ -59,6 +64,6 @@ export const Counter: React.FC<iCounter> = ({
           Add If Odd
         </button>
       </div>
-    </div>
+    </StyledDiv>
   );
 }

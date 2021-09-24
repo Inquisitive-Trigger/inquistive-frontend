@@ -18,6 +18,7 @@ const App = () => {
 
         <Route path="/">
           <h1>HAIIII</h1>
+          <h1>Try Me Counter! <Link to="/counter">Me Link!</Link></h1>
         </Route>
       </Switch>
     </Router>
