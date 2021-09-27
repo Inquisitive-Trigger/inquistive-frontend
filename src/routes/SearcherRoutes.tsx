@@ -10,12 +10,17 @@ import {
 import { SearcherListPageContainer } from '../container/page/SearcherListPageContainer'
 import { SearcherDetailPageContainer } from '../container/page/SearcherDetailPageContainer'
 import { SearcherTopbar } from '../component/atom/SearcherTopbar'
+import { SearcherCreatePageContainer } from '../container/page/SearcherCreatePageContainer'
 
 export const SearcherRoutes = () => {
   return (
     <div>
       <SearcherTopbar />
       <Switch>
+        <Route path="/searcher/create">
+          <SearcherCreatePageContainer />
+        </Route>
+
         <Route path="/searcher/list">
           <SearcherListPageContainer />
         </Route>
