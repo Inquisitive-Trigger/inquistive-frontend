@@ -27,19 +27,10 @@ const IntroducerSearchContainer = styled.div`
   align-items: center;
 `
 
-const SectionHeader = styled.div`
-  width: 90%;
-  max-width: 1080px;
-  color: ${color.darkGreen};
-  font-weight: 900;
-  text-align: left;
-`
-
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 15px;
   max-width: 1080px;
 `
 
