@@ -12,6 +12,7 @@ import 'antd/dist/antd.css'
 import { SignupPageContainer } from './container/page/SignupPageContainer'
 import IntroducerListPageContainer from './container/page/IntroducerListPageContainer'
 import { IntroducerRoutes } from './routes/IntroducerRoutes'
+import { SearcherRoutes } from './routes/SearcherRoutes'
 
 axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
 
@@ -44,6 +45,10 @@ const App = () => {
         </Route>
         <Route path="/signup">
           <SignupPageContainer />
+        </Route>
+
+        <Route path="/searcher">
+          <SearcherRoutes />
         </Route>
 
         <Route path="/introducer">
