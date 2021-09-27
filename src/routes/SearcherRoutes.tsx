@@ -8,6 +8,7 @@ import {
   Redirect
 } from 'react-router-dom'
 import { SearcherListPageContainer } from '../container/page/SearcherListPageContainer'
+import { SearcherDetailPageContainer } from '../container/page/SearcherDetailPageContainer'
 
 export const SearcherRoutes = () => {
   return (
@@ -16,6 +17,10 @@ export const SearcherRoutes = () => {
       <Switch>
         <Route path="/searcher/list">
           <SearcherListPageContainer />
+        </Route>
+
+        <Route path="/searcher/project/:id">
+          <SearcherDetailPageContainer />
         </Route>
 
         <Route path="/">
