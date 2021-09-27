@@ -11,12 +11,25 @@ import IntroducerListPageContainer from '../container/page/IntroducerListPageCon
 import { IntroducerSearchPageContainer } from '../container/page/IntroducerSearchPageContainer'
 import { IntroducerDetailPageContainer } from '../container/page/IntroducerDetailPageContainer'
 import { IntroducerIntroducePageContainer } from '../container/page/IntroducerIntroducePageContainer'
+import { IntroducerStatusPageContainer } from '../container/page/IntroducerStatusPageContainer'
 
 export const IntroducerRoutes = () => {
   return (
     <div>
       <Topbar />
       <Switch>
+        <Route path="/introducer/status">
+          <IntroducerStatusPageContainer />
+        </Route>
+
+        <Route path="/introducer/status/:id">
+          <IntroducerListPageContainer />
+        </Route>
+
+        <Route path="/introducer/project/list">
+          <IntroducerListPageContainer />
+        </Route>
+
         <Route path="/introducer/project/list">
           <IntroducerListPageContainer />
         </Route>

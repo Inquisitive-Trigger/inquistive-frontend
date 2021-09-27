@@ -51,7 +51,7 @@ const Topbar = () => {
       <Title>Inquisitive</Title>
       <TabContainer>
         <StyledLink to="/introducer/home" isSelected={location.pathname.includes('project')}>Project</StyledLink>
-        <StyledLink to="/introducer/activity" isSelected={location.pathname.includes('activity')}>Activity</StyledLink>
+        <StyledLink to="/introducer/status" isSelected={location.pathname.includes('status')}>Status</StyledLink>
       </TabContainer>
     </TopbarContainer>
   )
