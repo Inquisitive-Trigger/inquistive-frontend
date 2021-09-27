@@ -9,11 +9,12 @@ import {
 } from 'react-router-dom'
 import { SearcherListPageContainer } from '../container/page/SearcherListPageContainer'
 import { SearcherDetailPageContainer } from '../container/page/SearcherDetailPageContainer'
+import { SearcherTopbar } from '../component/atom/SearcherTopbar'
 
 export const SearcherRoutes = () => {
   return (
     <div>
-      <Topbar />
+      <SearcherTopbar />
       <Switch>
         <Route path="/searcher/list">
           <SearcherListPageContainer />

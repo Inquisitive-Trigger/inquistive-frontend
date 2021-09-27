@@ -31,7 +31,6 @@ const SectionHeader = styled.div`
   width: 90%;
   max-width: 1080px;
   color: ${color.darkGreen};
-  margin-top: 20px;
   font-weight: 900;
   text-align: left;
 `
