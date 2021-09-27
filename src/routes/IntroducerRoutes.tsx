@@ -13,13 +13,18 @@ import { IntroducerDetailPageContainer } from '../container/page/IntroducerDetai
 import { IntroducerIntroducePageContainer } from '../container/page/IntroducerIntroducePageContainer'
 import { IntroducerStatusPageContainer } from '../container/page/IntroducerStatusPageContainer'
 import { IntroducerStatusIntroListPageContainer } from '../container/page/IntroducerStatusIntroListPageContainer'
+import { IntroducerStatusDetailPageContainer } from '../container/page/IntroducerStatusDetailPageContainer'
 
 export const IntroducerRoutes = () => {
   return (
     <div>
       <Topbar />
       <Switch>
-        <Route path="/introducer/status/:id">
+        <Route path="/introducer/status/:projectid/company/:companyid">
+          <IntroducerStatusDetailPageContainer />
+        </Route>
+
+        <Route path="/introducer/status/:projectid">
           <IntroducerStatusIntroListPageContainer />
         </Route>
 
