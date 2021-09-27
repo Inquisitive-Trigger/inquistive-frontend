@@ -12,12 +12,17 @@ import { IntroducerSearchPageContainer } from '../container/page/IntroducerSearc
 import { IntroducerDetailPageContainer } from '../container/page/IntroducerDetailPageContainer'
 import { IntroducerIntroducePageContainer } from '../container/page/IntroducerIntroducePageContainer'
 import { IntroducerStatusPageContainer } from '../container/page/IntroducerStatusPageContainer'
+import { IntroducerStatusIntroListPageContainer } from '../container/page/IntroducerStatusIntroListPageContainer'
 
 export const IntroducerRoutes = () => {
   return (
     <div>
       <Topbar />
       <Switch>
+        <Route path="/introducer/status/:id">
+          <IntroducerStatusIntroListPageContainer />
+        </Route>
+
         <Route path="/introducer/status">
           <IntroducerStatusPageContainer />
         </Route>
