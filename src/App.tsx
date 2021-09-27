@@ -7,6 +7,9 @@ import {
   Link
 } from 'react-router-dom'
 import axios from 'axios'
+import { SigninPageContainer } from './container/page/SigninPageContainer'
+import 'antd/dist/antd.css'
+import { SignupPageContainer } from './container/page/SignupPageContainer'
 
 axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
 
@@ -33,6 +36,12 @@ const App = () => {
       <Switch>
         <Route path="/counter">
           <CounterContainer />
+        </Route>
+        <Route path="/signin">
+          <SigninPageContainer />
+        </Route>
+        <Route path="/signup">
+          <SignupPageContainer />
         </Route>
 
         <Route path="/">
