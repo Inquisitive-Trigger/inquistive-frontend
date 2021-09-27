@@ -5,7 +5,9 @@ export const Button = styled.button<{
   color?: string,
   backgroundColor?: string,
   margin?: string,
-  height?: string
+  height?: string,
+  width?: string,
+  maxWidth?: string
 }>`
   border-radius: 15px;
   border: 0;
@@ -13,6 +15,8 @@ export const Button = styled.button<{
   ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
   ${({ margin }) => margin && `margin: ${margin};`}
   ${({ height }) => height && `height: ${height};`}
+  ${({ width }) => width && `width: ${width};`}
+  ${({ maxWidth }) => maxWidth && `max-width: ${maxWidth};`}
   transition: all 0.3s;
   box-shadow: 2px 2px 3px 2px #444;
 
