@@ -54,19 +54,6 @@ const Header = styled.h1`
   font-weight: 700;
 `
 
-const CardLabel = styled.div`
-  display: block;
-  width: 90%;
-  max-width: 1080px;
-  color: ${color.darkGreen};
-  font-weight: 900;
-`
-
-const CardContainer = styled.div`
-  width: 90%;
-  max-width: 1080px;
-`
-
 type iSearcherCreatePage = {
 }
 
