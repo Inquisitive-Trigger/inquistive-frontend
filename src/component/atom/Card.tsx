@@ -14,6 +14,7 @@ export const Card = styled.div<{
   padding: 10px 15px;
   border-radius: 20px;
   max-width: 500px;
+  width: 90%;
 
 
   & > .company-name {

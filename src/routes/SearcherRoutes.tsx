@@ -12,6 +12,7 @@ import { SearcherDetailPageContainer } from '../container/page/SearcherDetailPag
 import { SearcherTopbar } from '../component/atom/SearcherTopbar'
 import { SearcherCreatePageContainer } from '../container/page/SearcherCreatePageContainer'
 import { SearcherIntroduceListPageContainer } from '../container/page/SearcherIntroduceListPageContainer'
+import { SearcherIntroduceDetailPageContainer } from '../container/page/SearcherIntroduceDetailPageContainer'
 
 export const SearcherRoutes = () => {
   return (
@@ -24,6 +25,10 @@ export const SearcherRoutes = () => {
 
         <Route path="/searcher/list">
           <SearcherListPageContainer />
+        </Route>
+
+        <Route path="/searcher/project/:id/introduce/:introduceid">
+          <SearcherIntroduceDetailPageContainer />
         </Route>
 
         <Route path="/searcher/project/:id/introduce">

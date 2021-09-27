@@ -43,18 +43,6 @@ const CardContainer = styled.div`
   max-width: 1080px;
 `
 
-const PlusButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-
-  & > svg {
-    font-size: 20px;
-    margin-right: 5px;
-  }
-`
-
 const StatusText = styled.p<{ status: string }>`
   color: ${({ status }) => status === 'approved' ? color.lightGreen : status === 'rejected' ? color.red : color.yellow};
   font-weight: 700;
@@ -88,11 +76,6 @@ export const SearcherIntroduceListPage: React.FC<iSearcherIntroduceListPage> = (
           </Card>
         ))}
       </CardContainer>
-
-      <PlusButton>
-        <FcPlus/> 新規案件
-      </PlusButton>
-      
     </IntroducerSearchContainer>
   )
 }
