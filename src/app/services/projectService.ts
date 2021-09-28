@@ -21,15 +21,14 @@ export const fetchProjectList = async() => {
   return res.data.projects as Project[]
 }
 
-<<<<<<< HEAD
 export const fetchProjectDetail = async(id: number) => {
   const res = await axios.get(`/projects/${id}`)
 
   return res.data.project as Project
-=======
+}
+
 export const searchProjects = async (category: string) => {
   const res = await axios.get(`/projects/search?category=${category}`)
 
   return res.data.projects as Project[]
->>>>>>> cce0953a73e94fae10be221535e8a73de2b407b7
 }
