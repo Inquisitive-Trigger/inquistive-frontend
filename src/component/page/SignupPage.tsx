@@ -152,13 +152,13 @@ export const SignupPage:React.FC<iSignupPage> = ({
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="email" >メールアドレス</label>
+        <label htmlFor="purpose">目的</label>
         <Select
           placeholder="目的を選択してください"
           onChange={handleChangePurpose}
         >
           <Option value="true">企業を紹介したい</Option>
-          <Option value="false">企業と出会いたい</Option>
+          <Option value="false">案件を応募したい</Option>
         </Select>
       </InputGroup>
 
