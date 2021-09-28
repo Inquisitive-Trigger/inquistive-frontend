@@ -25,12 +25,12 @@ export type iRegistrationForm = {
   type: boolean
 }
 
-export const registerUser = async (
-  name: string,
-  email: string, 
-  password: string,
-  type: boolean
-) => {
+export const registerUser = async ({
+  name,
+  email, 
+  password,
+  type
+}: iRegistrationForm) => {
   const res = await axios.post('/user', {
     name,
     email,

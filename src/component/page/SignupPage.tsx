@@ -97,7 +97,7 @@ export const SignupPage:React.FC<iSignupPage> = ({
         type: value === 'true' ? true : false
       })
     },
-    []
+    [registrationForm]
   )
 
   const handleCheckRule = React.useCallback(

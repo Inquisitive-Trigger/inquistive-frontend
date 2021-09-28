@@ -4,5 +4,6 @@ import { IntroducerStatusPage } from '../../component/page/IntroducerStatusPage'
 
 export const IntroducerStatusPageContainer = () => {
 
+  
   return <IntroducerStatusPage />
 }
