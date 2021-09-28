@@ -5,6 +5,7 @@ import { color } from '../../utils/color'
 import { FcPlus } from 'react-icons/fc'
 import { Card } from '../atom/Card'
 import { Project } from '../../app/services/projectService'
+import { useHistory } from 'react-router'
 
 const IntroducerSearchContainer = styled.div`
   display: flex;
@@ -47,13 +48,18 @@ type iSearcherListPage = {
 export const SearcherListPage: React.FC<iSearcherListPage> = ({
   projects
 }) => {
+  const history = useHistory()
 
   return (
     <IntroducerSearchContainer>
       <SectionHeader>実行中案件</SectionHeader>
       <CardContainer>
         {projects.map(project => (
-          <Card key={project.id} margin="8px 20px">
+          <Card
+            key={project.id}
+            margin="8px 20px"
+            onClick={() => history.push(`/searcher/project/${project.id}`)}
+          >
             <p className="company-name">{project.company_name}</p>
             <h3 className="project-title">{project.name}</h3>
             <p className="concept">{project.concept}</p>

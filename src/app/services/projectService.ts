@@ -20,3 +20,9 @@ export const fetchProjectList = async() => {
 
   return res.data.projects as Project[]
 }
+
+export const fetchProjectDetail = async(id: number) => {
+  const res = await axios.get(`/projects/${id}`)
+
+  return res.data.project as Project
+}
