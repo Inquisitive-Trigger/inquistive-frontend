@@ -6,6 +6,7 @@ import { FaUser } from 'react-icons/fa'
 import { BsFillLockFill } from 'react-icons/bs'
 import { Button } from '../atom/Button'
 import { Link } from 'react-router-dom'
+import { iSigninForm } from '../../app/services/userService'
 
 const SigninWrapper = styled.div`
   width: 100vw;
@@ -32,21 +33,69 @@ const Title = styled.div`
   color: ${color.white};
 `
 
-const SigninPage = () => {
+type iSigninPage = {
+  onSubmit: (signinForm: iSigninForm) => Promise<void>
+}
+
+export const SigninPage: React.FC<iSigninPage> = ({
+  onSubmit
+}) => {
+  const [signinForm, setSigninForm] = React.useState<iSigninForm>({
+    email: '',
+    password: ''
+  })
+
+  const handleChangeText = React.useCallback(
+    e => {
+      const name = e.currentTarget.name
+      const value = e.currentTarget.value
+
+      setSigninForm({
+        ...signinForm,
+        [name]: value
+      })
+    },
+    [signinForm]
+  )
+
+  const handleSignin = React.useCallback(
+    async () =>{
+      await onSubmit(signinForm)
+    },
+    [signinForm]
+  )
+
   return (
     <SigninWrapper>
       <Title>Inquisitive</Title>
-      <Input placeholder="メールアドレス"　size="large" prefix={<FaUser />} />
-      <Input.Password placeholder="パスワード" size="large" prefix={<BsFillLockFill />} />
-      <Button backgroundColor={color.darkGreen} color={color.white} height="40px">ログイン</Button>
+      <Input
+        placeholder="メールアドレス"
+        size="large"
+        prefix={<FaUser />}
+        name="email"
+        onChange={handleChangeText}
+      />
+      <Input.Password
+        placeholder="パスワード"
+        size="large"
+        prefix={<BsFillLockFill />}
+        name="password"
+        onChange={handleChangeText}
+      />
+      <Button
+        backgroundColor={color.darkGreen}
+        color={color.white}
+        height="40px"
+        onClick={handleSignin}
+      >
+        ログイン
+      </Button>
       <div>
         初めての方？<Link to="/signup">新規登録</Link>しましょう
       </div>
     </SigninWrapper>
   )
 }
-
-export default SigninPage
 
 // /session?email=&password=
 // Authorization Token {{token}}

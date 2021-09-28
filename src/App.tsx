@@ -17,11 +17,15 @@ import { SearcherRoutes } from './routes/SearcherRoutes'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Cookies from 'js-cookie'
+import { useAppDispatch, useAppSelector } from './app/hooks'
+import { authenticateUser, selectIsAuth, selectUser } from './app/slices/userSlice'
 
 axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
 
 const App = () => {
-  const [isAuth, setIsAuth] = React.useState(false)
+  const isAuth = useAppSelector(selectIsAuth)
+  const user = useAppSelector(selectUser)
+  const dispatch = useAppDispatch()
 
   React.useEffect(
     () => {
@@ -35,9 +39,18 @@ const App = () => {
             axios.defaults.headers.common['Authorization'] = `Token ${token}`
 
             // If token invalid will throw error
-            await axios.get('http://3.113.26.48/')
+            const res = await axios.get('http://3.113.26.48/')
+            const data = res.data.user
 
-            setIsAuth(true)
+            dispatch(authenticateUser({
+              user: {
+                name: data.name,
+                email: data.email,
+                type: data.purpose ? 'introducer' : 'searcher'
+              },
+              isAuth: true
+            }))
+
           }
         } catch (err) {
           console.error(err)
@@ -51,23 +64,29 @@ const App = () => {
     <>
       <ToastContainer />
       <Router>
-        {isAuth ? <Switch>
-            <Route path="/counter">
-              <CounterContainer />
-            </Route>
+        {isAuth ? 
+          user.type === 'introducer' ? (
+            <Switch>
+              <Route path="/introducer">
+                <IntroducerRoutes />
+              </Route>
 
-            <Route path="/searcher">
-              <SearcherRoutes />
-            </Route>
+              <Route path="/">
+                <Redirect to="/introducer" />
+              </Route>
+            </Switch>
+          ) : (
+            <Switch>
+              <Route path="/searcher">
+                <SearcherRoutes />
+              </Route>
 
-            <Route path="/introducer">
-              <IntroducerRoutes />
-            </Route>
-
-            <Route path="/">
-              <Redirect to="/introducer" />
-            </Route>
-          </Switch> :
+              <Route path="/">
+                <Redirect to="/searcher" />
+              </Route>
+            </Switch>
+          )
+        :
           <Switch>
             <Route path="/signin">
               <SigninPageContainer />
