@@ -52,7 +52,7 @@ export const IntroducerRoutes = () => {
           <IntroducerDetailPageContainer />
         </Route>
 
-        <Route path="/introducer/project/introduce/:id">
+        <Route path="/introducer/project/:id/introduce">
           <IntroducerIntroducePageContainer />
         </Route>
 

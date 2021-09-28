@@ -1,25 +1,10 @@
 import React from 'react'
-import { Select } from 'antd'
 import styled from 'styled-components'
+import { Project } from '../../app/services/projectService'
 import { color } from '../../utils/color'
-import { useParams } from 'react-router'
 import { Button } from '../atom/Button'
-
-const datas = [{
-  key: 999,
-  companyName: '株式会社○○',
-  projectName: '新事業立ち上げ',
-  concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-}]
-
-for (let i = 0; i < 30; i++) {
-  datas.push({
-    key: i,
-    companyName: '株式会社○○',
-    projectName: '新事業立ち上げ',
-    concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-  })
-}
+import moment from 'moment'
+import { useHistory } from 'react-router'
 
 const IntroducerDetailContainer = styled.div`
   display: flex;
@@ -32,7 +17,7 @@ const IntroducerDetailContainer = styled.div`
   }
 `
 
-const TextDetailContainer = styled.div`
+const OverviewContainer = styled.div`
   width: 90%;
   max-width: 1080px;
   display: flex;
@@ -44,19 +29,37 @@ const TextDetailContainer = styled.div`
   }
 `
 
+const DetailContainer = styled.div`
+  width: 90%;
+  max-width: 1080px;
+  margin-top: 20px;
+  line-height: 2;
+`
+
 type iIntroducerDetailPage = {
+  project: Project
 }
 
 export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
+  project
 }) => {
+  const history = useHistory()
 
   return (
     <IntroducerDetailContainer>
-      <TextDetailContainer>
-        <p className="company-name">株式会社○○</p>
-        <h3 className="project-title">新事業立ち上げ</h3>
-        <p className="concept">新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です</p>
-      </TextDetailContainer>
+      <OverviewContainer>
+        <p className="company-name">{project.company_name}</p>
+        <h3 className="project-title">{project.name}</h3>
+        <p className="concept">{project.concept}</p>
+      </OverviewContainer>
+      <DetailContainer>
+        <div>状態：{project.status}</div>
+        <div>期限：{moment(project.deadline).format('YYYY年MM月DD日')}</div>
+        <div>報酬：{project.reward}</div>
+        <div>業種：{project.category}</div>
+        <div>作成日：{moment(project.created_at).format('YYYY年MM月DD日')}</div>
+        <div>最終更新日：{moment(project.updated_at).format('YYYY年MM月DD日')}</div>
+      </DetailContainer>
       <Button
         backgroundColor={color.lightGreen}
         color={color.white}
@@ -64,6 +67,7 @@ export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
         width="90%"
         maxWidth="1080px"
         margin="40px 0 0 0"
+        onClick={() => history.push(`/introducer/project/${[project.id]}/introduce`)}
       >
         企業を紹介する
       </Button>

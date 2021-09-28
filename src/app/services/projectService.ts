@@ -15,6 +15,19 @@ export type Project = {
   company_name: string
 }
 
+export const createEmptyProject = () => ({
+  id: 999,
+  name: '',
+  status: '',
+  concept: '',
+  deadline: new Date(),
+  reward: '',
+  created_at: new Date(),
+  updated_at: new Date(),
+  category: '',
+  company_name: ''
+}) 
+
 export const fetchProjectList = async() => {
   const res = await axios.get('/projects')
 
