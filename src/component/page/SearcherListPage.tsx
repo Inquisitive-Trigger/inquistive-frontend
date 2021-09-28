@@ -4,22 +4,7 @@ import styled from 'styled-components'
 import { color } from '../../utils/color'
 import { FcPlus } from 'react-icons/fc'
 import { Card } from '../atom/Card'
-
-const datas = [{
-  key: 999,
-  companyName: '株式会社○○',
-  projectName: '新事業立ち上げ',
-  concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-}]
-
-for (let i = 0; i < 2; i++) {
-  datas.push({
-    key: i,
-    companyName: '株式会社○○',
-    projectName: '新事業立ち上げ',
-    concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-  })
-}
+import { Project } from '../../app/services/projectService'
 
 const IntroducerSearchContainer = styled.div`
   display: flex;
@@ -56,20 +41,22 @@ const PlusButton = styled.div`
 `
 
 type iSearcherListPage = {
+  projects: Project[]
 }
 
 export const SearcherListPage: React.FC<iSearcherListPage> = ({
+  projects
 }) => {
 
   return (
     <IntroducerSearchContainer>
       <SectionHeader>実行中案件</SectionHeader>
       <CardContainer>
-        {datas.map(data => (
-          <Card key={data.key} margin="8px 20px">
-            <p className="company-name">{data.companyName}</p>
-            <h3 className="project-title">{data.projectName}</h3>
-            <p className="concept">{data.concept}</p>
+        {projects.map(project => (
+          <Card key={project.id} margin="8px 20px">
+            <p className="company-name">{project.company_name}</p>
+            <h3 className="project-title">{project.name}</h3>
+            <p className="concept">{project.concept}</p>
           </Card>
         ))}
       </CardContainer>
