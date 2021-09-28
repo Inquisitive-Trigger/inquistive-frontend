@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { color } from '../../utils/color'
 import { FcPlus } from 'react-icons/fc'
 import { Card } from '../atom/Card'
-import { ApplicationCompany } from '../../app/services/applicationCompanyService'
+import { ApplicationCompany } from '../../app/services/applicationService'
 
 const datas = [{
   key: 999,

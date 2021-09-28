@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useParams } from 'react-router'
 import { SearcherIntroduceListPage } from '../../component/page/SearcherIntroduceListPage'
-import { ApplicationCompany } from '../../app/services/applicationCompanyService'
+import { ApplicationCompany } from '../../app/services/applicationService'
 import { fetchApplicationFromProject } from '../../app/services/projectService'
 import { toast } from 'react-toastify'
 

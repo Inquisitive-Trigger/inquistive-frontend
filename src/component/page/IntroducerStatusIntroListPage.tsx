@@ -70,7 +70,7 @@ export const IntroducerStatusIntroListPage: React.FC<iIntroducerStatusIntroListP
             margin="8px 20px"
             onClick={() => history.push(`/introducer/status/${data.id}`)}
           >
-            <StatusText status={data.status}>{generateStatus(data.status)}</StatusText>
+            <StatusText status={data.status_project}>{generateStatus(data.status_project)}</StatusText>
             <h3 className="project-title">{data.name}</h3>
             <p className="concept">{data.detail}</p>
             <p>紹介先：{data.project.name}</p>

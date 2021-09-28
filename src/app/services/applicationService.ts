@@ -12,9 +12,10 @@ export type ApplicationCompany = {
   contact_name: string
   created_at: Date
   detail: string
+  reason: string
   phone_number: string
   project: Project
-  status: string
+  status_project: string
 }
 
 export const createEmptyApplicationCompany = () => ({
