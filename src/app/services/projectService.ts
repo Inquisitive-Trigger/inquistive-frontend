@@ -64,6 +64,12 @@ export const fetchProject = async (id: string) => {
   return res.data.project as Project
 }
 
+export const fetchApplicationFromProject = async(id: string) => {
+  const res = await axios.get(`/projects/${id}/application_companies`)
+
+  return res.data.applicationCompanies
+}
+
 export type ApplicationCompanyForm = {
   name: string
   detail: string

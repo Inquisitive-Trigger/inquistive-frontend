@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { color } from '../../utils/color'
 import { FcPlus } from 'react-icons/fc'
 import { Card } from '../atom/Card'
+import { ApplicationCompany } from '../../app/services/applicationCompanyService'
 
 const datas = [{
   key: 999,
@@ -49,9 +50,11 @@ const StatusText = styled.p<{ status: string }>`
 `
 
 type iSearcherIntroduceListPage = {
+  applications: ApplicationCompany[]
 }
 
 export const SearcherIntroduceListPage: React.FC<iSearcherIntroduceListPage> = ({
+  applications
 }) => {
 
   const generateStatus = React.useCallback(
@@ -66,13 +69,13 @@ export const SearcherIntroduceListPage: React.FC<iSearcherIntroduceListPage> = (
 
   return (
     <IntroducerSearchContainer>
-      <SectionHeader>"案件名"の紹介一覧</SectionHeader>
+      <SectionHeader>"{applications.length !== 0 && applications[0].project.name}"の紹介一覧</SectionHeader>
       <CardContainer>
-        {datas.map(data => (
-          <Card key={data.key} margin="8px 20px">
-            <StatusText status={data.status}>{generateStatus(data.status)}</StatusText>
-            <h3 className="project-title">{data.name}</h3>
-            <p className="concept">{data.appeal}</p>
+        {applications.length !== 0 && applications.map(application => (
+          <Card key={application.id} margin="8px 20px">
+            <StatusText status={application.status_project}>{generateStatus(application.status_project)}</StatusText>
+            <h3 className="project-title">{application.name}</h3>
+            <p className="concept">{application.reason}</p>
           </Card>
         ))}
       </CardContainer>

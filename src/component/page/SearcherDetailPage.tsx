@@ -85,13 +85,22 @@ export const SearcherDetailPage: React.FC<iSearcherDetailPage> = ({
         <p className="concept">{project.concept}</p>
       </TextDetailContainer>
       <Button
-        onClick={() => history.push("/searcher/list")}
+        onClick={() => history.push(`/searcher/project/${project.id}/introduce`)}
         height="40px"
         width="90%"
         maxWidth="1080px"
         margin="40px 0 0 0"
       >
         紹介一覧を見る
+      </Button>
+      <Button
+        onClick={() => history.push("/searcher/list")}
+        height="40px"
+        width="90%"
+        maxWidth="1080px"
+        margin="40px 0 0 0"
+      >
+        案件一覧に戻る
       </Button>
     </SearcherDetailContainer>
   )

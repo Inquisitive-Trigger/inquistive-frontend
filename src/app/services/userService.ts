@@ -11,6 +11,17 @@ export type iSigninForm = {
   password: string
 }
 
+export type User = {
+  id: number
+  name: string
+  email: string
+  created_at: Date
+  updated_at: Date
+  password: string
+  token: string
+  purpose: boolean
+}
+
 export const fetchSession = async ({
   email, 
   password
