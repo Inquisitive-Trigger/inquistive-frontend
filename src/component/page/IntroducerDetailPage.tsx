@@ -66,7 +66,7 @@ export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
       </DetailContainer>
       <DetailContainer>
         <label>商談成立報酬の目安</label>
-        <div>{Number(project.reward) * 0.005}</div>
+        <div>{`${Number(project.reward) * 0.005}円`}</div>
       </DetailContainer>
       <DetailContainer>
         <label>このサービスの強み</label>
