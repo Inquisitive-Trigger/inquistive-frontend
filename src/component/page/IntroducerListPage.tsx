@@ -117,7 +117,7 @@ const IntroducerListPage: React.FC<iIntroducerListPage> = ({
       <SectionHeader>最新案件</SectionHeader>
       <CardContainer>
         {projects.map(project => (
-          <Card key={project.id}>
+          <Card key={project.id} onClick={() => history.push(`/introducer/project/detail/${project.id}`)}>
             <p className="company-name">{project.company_name}</p>
             <h3 className="project-title">{project.name}</h3>
             <p className="concept">{project.concept}</p>
