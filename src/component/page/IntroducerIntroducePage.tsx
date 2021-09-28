@@ -6,7 +6,8 @@ import { useParams } from 'react-router'
 import { Button } from '../atom/Button'
 import { Card } from '../atom/Card'
 import { Input } from '../atom/Input'
-import { ApplicationCompanyForm, Project } from '../../app/services/projectService'
+import { Project } from '../../app/services/projectService'
+import { ApplicationCompany, ApplicationCompanyForm } from '../../app/services/applicationService'
 
 const InputGroup = styled.div`
   width: 90%;
@@ -71,11 +72,15 @@ const CardContainer = styled.div`
 type iIntroducerIntroducePage = {
   project: Project
   onApply: (applicationCompanyForm: ApplicationCompanyForm) => void
+  applicationCompany?: ApplicationCompany
+  type: 'create' | 'update'
 }
 
 export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
   project,
-  onApply
+  onApply,
+  applicationCompany,
+  type
 }) => {
   const [applicationForm, setApplicationForm] = React.useState<ApplicationCompanyForm>({
     name: '',
@@ -86,6 +91,23 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
     phoneNumber: '',
     projectId: 0
   })
+
+  React.useEffect(
+    () => {
+      if (applicationCompany) {
+        setApplicationForm({
+          name: applicationCompany.name,
+          detail: applicationCompany.detail,
+          reason: applicationCompany.reason,
+          contactEmail: applicationCompany.contact_email,
+          contactName: applicationCompany.contact_name,
+          phoneNumber: applicationCompany.phone_number,
+          projectId: project.id
+        })
+      }
+    },
+    [applicationCompany]
+  )
 
 
   const handleChangeText = React.useCallback(
@@ -111,7 +133,7 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
   return (
     <IntroducerIntroduceContainer>
       <Header>
-        企業を紹介する
+        {type === 'create' ? '企業を紹介する' : '紹介内容を編集する'}
       </Header>
 
       <CardContainer>
@@ -130,6 +152,7 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
           name="name"
           id="name"
           onChange={handleChangeText}
+          value={applicationForm.name}
         />
       </InputGroup>
 
@@ -142,6 +165,7 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
           id="detail"
           rows={8}
           onChange={handleChangeText}
+          value={applicationForm.detail}
         />
       </InputGroup>
 
@@ -154,6 +178,7 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
           id="reason"
           rows={8}
           onChange={handleChangeText}
+          value={applicationForm.reason}
         />
       </InputGroup>
 
@@ -164,6 +189,7 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
           name="contactName"
           id="contactName"
           onChange={handleChangeText}
+          value={applicationForm.contactName}
         />
       </InputGroup>
 
@@ -174,6 +200,7 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
           name="contactEmail"
           id="contactEmail"
           onChange={handleChangeText}
+          value={applicationForm.contactEmail}
         />
       </InputGroup>
       

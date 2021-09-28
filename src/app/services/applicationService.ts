@@ -58,3 +58,23 @@ export const denyApplicationComapny = async (id: string) => {
 
   return res.data.applicationCompany as ApplicationCompany
 }
+
+export type ApplicationCompanyForm = {
+  name: string
+  detail: string
+  reason: string
+  contactName: string
+  contactEmail: string
+  phoneNumber: string
+  projectId: number
+}
+
+export const applyCompany = async (applicationCompanyForm: ApplicationCompanyForm) => {
+  const res = await axios.post('/application_companies', applicationCompanyForm)
+
+  return res.data.application_companies
+}
+
+export const editApplicationCompany = async (application_id: number, applicationCompanyForm: ApplicationCompanyForm) => {
+  await axios.put(`/application_companies/${application_id}`, applicationCompanyForm)
+}

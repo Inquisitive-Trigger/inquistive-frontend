@@ -4,6 +4,7 @@ import { Button } from '../atom/Button'
 import { FaPencilAlt, FaTrash } from 'react-icons/fa'
 import { color } from '../../utils/color'
 import { ApplicationCompany } from '../../app/services/applicationService'
+import { useHistory } from 'react-router'
 
 const datas = [{
   key: 999,
@@ -58,6 +59,8 @@ export const IntroducerStatusDetailPage: React.FC<iIntroducerStatusDetailPage> =
   applicationCompany,
   deleteApplication
 }) => {
+  const history = useHistory()
+
   return (
     <IntroducerStatusDetailPageContainer>
       <TextDetailContainer>
@@ -81,6 +84,7 @@ export const IntroducerStatusDetailPage: React.FC<iIntroducerStatusDetailPage> =
         width="90%"
         maxWidth="1080px"
         margin="40px 0 0 0"
+        onClick={() => history.push(`/introducer/status/${applicationCompany.id}/edit`)}
       >
         編集
       </Button>

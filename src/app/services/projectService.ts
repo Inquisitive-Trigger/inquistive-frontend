@@ -69,19 +69,3 @@ export const fetchApplicationFromProject = async(id: string) => {
 
   return res.data.applicationCompanies
 }
-
-export type ApplicationCompanyForm = {
-  name: string
-  detail: string
-  reason: string
-  contactName: string
-  contactEmail: string
-  phoneNumber: string
-  projectId: number
-}
-
-export const applyCompany = async (applicationCompanyForm: ApplicationCompanyForm) => {
-  const res = await axios.post('/application_companies', applicationCompanyForm)
-
-  return res.data.application_companies
-}
