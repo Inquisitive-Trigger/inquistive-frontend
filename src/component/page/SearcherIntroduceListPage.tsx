@@ -1,26 +1,9 @@
 import React from 'react'
-import { Select } from 'antd'
 import styled from 'styled-components'
 import { color } from '../../utils/color'
-import { FcPlus } from 'react-icons/fc'
 import { Card } from '../atom/Card'
 import { ApplicationCompany } from '../../app/services/applicationService'
-
-const datas = [{
-  key: 999,
-  name: '株式会社○○',
-  appeal: 'この会社はすごくて、とりあえずすごい！',
-  status: 'approved'
-}]
-
-for (let i = 0; i < 3; i++) {
-  datas.push({
-    key: i,
-    name: '株式会社○○',
-    appeal: 'この会社はすごくて、とりあえずすごい！',
-    status: i % 3 === 0 ? 'approved' : i % 2 === 0 ? 'pending' : 'rejected'
-  })
-}
+import { useHistory } from 'react-router'
 
 const IntroducerSearchContainer = styled.div`
   display: flex;
@@ -56,24 +39,19 @@ type iSearcherIntroduceListPage = {
 export const SearcherIntroduceListPage: React.FC<iSearcherIntroduceListPage> = ({
   applications
 }) => {
-
-  const generateStatus = React.useCallback(
-    (status: string) => {
-      if (status === 'approved') { return '承諾' }
-      if (status === 'rejected') { return '拒否' }
-
-      return '返答待ち'
-    },
-    []
-  )
+  const history = useHistory()
 
   return (
     <IntroducerSearchContainer>
       <SectionHeader>"{applications.length !== 0 && applications[0].project.name}"の紹介一覧</SectionHeader>
       <CardContainer>
         {applications.length !== 0 && applications.map(application => (
-          <Card key={application.id} margin="8px 20px">
-            <StatusText status={application.status_project}>{generateStatus(application.status_project)}</StatusText>
+          <Card
+            key={application.id}
+            margin="8px 20px"
+            onClick={() => history.push(`/searcher/project/${application.project.id}/introduce/${application.id}`)}
+          >
+            <StatusText status={application.status_project}>{application.status_project}</StatusText>
             <h3 className="project-title">{application.name}</h3>
             <p className="concept">{application.reason}</p>
           </Card>
