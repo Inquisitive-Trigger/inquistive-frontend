@@ -13,6 +13,8 @@ export type Project = {
   updated_at: Date
   category: string
   company_name: string
+  wish_person: string
+  appeal: string
 }
 
 export const createEmptyProject = () => ({
@@ -25,7 +27,9 @@ export const createEmptyProject = () => ({
   created_at: new Date(),
   updated_at: new Date(),
   category: '',
-  company_name: ''
+  company_name: '',
+  wish_person: '',
+  appeal: ''
 }) 
 
 export const fetchProjectList = async() => {

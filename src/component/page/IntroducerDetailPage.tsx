@@ -34,6 +34,11 @@ const DetailContainer = styled.div`
   max-width: 1080px;
   margin-top: 20px;
   line-height: 2;
+
+  & > label {
+    color: ${color.darkGreen};
+    font-weight: 900;
+  }
 `
 
 type iIntroducerDetailPage = {
@@ -50,15 +55,50 @@ export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
       <OverviewContainer>
         <p className="company-name">{project.company_name}</p>
         <h3 className="project-title">{project.name}</h3>
-        <p className="concept">{project.concept}</p>
       </OverviewContainer>
       <DetailContainer>
-        <div>状態：{project.status}</div>
-        <div>期限：{moment(project.deadline).format('YYYY年MM月DD日')}</div>
-        <div>報酬：{project.reward}</div>
-        <div>業種：{project.category}</div>
-        <div>作成日：{moment(project.created_at).format('YYYY年MM月DD日')}</div>
-        <div>最終更新日：{moment(project.updated_at).format('YYYY年MM月DD日')}</div>
+        <label>案件概要</label>
+        <div>{project.concept}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>活動をお願いしたい方</label>
+        <div>{project.wish_person || "飲食業界とつながりがある方"}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>商談成立報酬の目安</label>
+        <div>{project.reward}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>このサービスの強み</label>
+        <div>{project.appeal || "飲食業界で発生する非効率なアナログの顧客体験の研究をDXを用いて改善します"}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>企業概要</label>
+        <div>{"所在地：青森県"}</div>
+        <div>{"従業員：10名"}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>会社ホームページのURL</label>
+        <div>{"https://chiho-chusho.com"}</div>
+      </DetailContainer>
+      <DetailContainer> <label>状態</label>
+        <div>{project.status}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>掲載期限</label>
+        <div>{moment(project.deadline).format('YYYY年MM月DD日')}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>業種</label>
+        <div>{project.category}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>掲載日</label>
+        <div>{moment(project.created_at).format('YYYY年MM月DD日')}</div>
+      </DetailContainer>
+      <DetailContainer>
+        <label>最終更新日</label>
+        <div>{moment(project.updated_at).format('YYYY年MM月DD日')}</div>
       </DetailContainer>
       <Button
         backgroundColor={color.lightGreen}
