@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { color } from '../../utils/color'
 import { FcPlus } from 'react-icons/fc'
 import { Card } from '../atom/Card'
+import { ApplicationCompany } from '../../app/services/applicationService'
+import { useHistory } from 'react-router'
 
 const datas = [{
   key: 999,
@@ -32,6 +34,7 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   max-width: 1080px;
+  width: 100%;
 `
 
 const StatusText = styled.p<{ status: string }>`
@@ -40,10 +43,13 @@ const StatusText = styled.p<{ status: string }>`
 `
 
 type iIntroducerStatusIntroListPage = {
+  applicationCompanies: ApplicationCompany[]
 }
 
 export const IntroducerStatusIntroListPage: React.FC<iIntroducerStatusIntroListPage> = ({
+  applicationCompanies
 }) => {
+  const history = useHistory()
 
   const generateStatus = React.useCallback(
     (status: string) => {
@@ -58,11 +64,16 @@ export const IntroducerStatusIntroListPage: React.FC<iIntroducerStatusIntroListP
   return (
     <IntroducerSearchContainer>
       <CardContainer>
-        {datas.map(data => (
-          <Card key={data.key} margin="8px 20px">
+        {applicationCompanies.map(data => (
+          <Card
+            key={data.id}
+            margin="8px 20px"
+            onClick={() => history.push(`/introducer/status/${data.id}`)}
+          >
             <StatusText status={data.status}>{generateStatus(data.status)}</StatusText>
             <h3 className="project-title">{data.name}</h3>
-            <p className="concept">{data.appeal}</p>
+            <p className="concept">{data.detail}</p>
+            <p>紹介先：{data.project.name}</p>
           </Card>
         ))}
       </CardContainer>
