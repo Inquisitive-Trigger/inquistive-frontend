@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useParams } from 'react-router'
-import { createEmptyProject, fetchProject, Project } from '../../app/services/projectService'
+import { createEmptyProject, fetchProjectDetail, Project } from '../../app/services/projectService'
 import { IntroducerDetailPage } from '../../component/page/IntroducerDetailPage'
 import { toast } from 'react-toastify'
 
@@ -12,7 +12,7 @@ export const IntroducerDetailPageContainer = () => {
     () => {
       (async () => {
         try {
-          const project = await fetchProject(id)
+          const project = await fetchProjectDetail(Number(id))
           setProject(project)
         } catch {
           toast.error('案件取得が失敗しました')

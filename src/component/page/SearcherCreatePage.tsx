@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { color } from '../../utils/color'
 import { Button } from '../atom/Button'
 import { Input } from '../atom/Input'
+import { Project } from '../../app/services/projectService'
 
 const { Option } = Select
 
@@ -55,10 +56,13 @@ const Header = styled.h1`
 `
 
 type iSearcherCreatePage = {
+  handleSubmit: (project: Project) => void
 }
 
 export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
+  handleSubmit
 }) => {
+  const [project, setProject] = React.useState({} as Project)
   return (
     <SearcherCreateContainer>
       <Header>
@@ -71,6 +75,7 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
           placeholder="スパープロジェクト"
           name="name"
           id="name"
+          onChange={e => setProject({ ...project, name: e.target.value })}
         />
       </InputGroup>
 
@@ -81,6 +86,7 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
           name="concept"
           id="concept"
           rows={8}
+          onChange={e => setProject({ ...project, concept: e.target.value })}
         />
       </InputGroup>
 
@@ -91,6 +97,7 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
           name="deadline"
           id="deadline"
           size="large"
+          onChange={e => setProject({ ...project, deadline: e?.toDate() })}
         />
       </InputGroup>
 
@@ -100,6 +107,7 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
           placeholder="300万円"
           name="reward"
           id="reward"
+          onChange={e => setProject({ ...project, reward: e.target.value })}
         />
       </InputGroup>
 
@@ -107,19 +115,21 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
         <label htmlFor="email">案件業種</label>
         <Select
           defaultValue="trading"
+          onSelect={e => setProject({ ...project, category: e })}
         >
-          <Option value="manufacturer">メーカー</Option>
-          <Option value="trading">商社</Option>
-          <Option value="distribution">流通・小売</Option>
-          <Option value="finance">金融</Option>
-          <Option value="infrastructure">サービス・インフラ</Option>
-          <Option value="software">ソフトウエア・通信</Option>
-          <Option value="ads">広告・出版・マスコミ</Option>
-          <Option value="public">官公庁・公社・団体</Option>
+          <Option value="メーカー">メーカー</Option>
+          <Option value="商社">商社</Option>
+          <Option value="流通・小売">流通・小売</Option>
+          <Option value="金融">金融</Option>
+          <Option value="サービス・インフラ">サービス・インフラ</Option>
+          <Option value="ソフトウエア・通信">ソフトウエア・通信</Option>
+          <Option value="広告・出版・マスコミ">広告・出版・マスコミ</Option>
+          <Option value="官公庁・公社・団体">官公庁・公社・団体</Option>
         </Select>
       </InputGroup>
       
       <Button
+        onClick={() => handleSubmit(project)}
         backgroundColor={color.lightGreen}
         color={color.white}
         height="40px"
@@ -127,7 +137,7 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
         maxWidth="1080px"
         margin="20px 0"
       >
-        企業を紹介する
+        案件を作成する
       </Button>
     </SearcherCreateContainer>
   )
