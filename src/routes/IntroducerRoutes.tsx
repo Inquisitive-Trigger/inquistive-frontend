@@ -20,20 +20,16 @@ export const IntroducerRoutes = () => {
     <div>
       <Topbar />
       <Switch>
-        <Route path="/introducer/status/:projectid/company/:companyid">
+        <Route path="/introducer/status/:companyid">
           <IntroducerStatusDetailPageContainer />
         </Route>
 
-        <Route path="/introducer/status/:projectid">
-          <IntroducerStatusIntroListPageContainer />
-        </Route>
+        {/* <Route path="/introducer/status">
+          <IntroducerStatusPageContainer />
+        </Route> */}
 
         <Route path="/introducer/status">
-          <IntroducerStatusPageContainer />
-        </Route>
-
-        <Route path="/introducer/status/:id">
-          <IntroducerListPageContainer />
+          <IntroducerStatusIntroListPageContainer />
         </Route>
 
         <Route path="/introducer/project/list">

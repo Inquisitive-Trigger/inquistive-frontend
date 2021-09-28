@@ -15,7 +15,7 @@ export const Card = styled.div<{
   border-radius: 20px;
   max-width: 500px;
   width: ${({ width }) => width ? width : '90%'};
-
+  cursor: pointer;
 
   & > .company-name {
 
