@@ -16,6 +16,7 @@ export type ApplicationCompany = {
   phone_number: string
   project: Project
   status_project: string
+  status_worker: string
 }
 
 export const createEmptyApplicationCompany = () => ({
@@ -34,4 +35,15 @@ export const fetchApplicationCompanies = async () => {
   const res = await axios.get('/application_companies')
 
   return res.data.applicationCompanies as ApplicationCompany[]
+}
+
+
+export const fetchApplicationCompany = async (id: string) => {
+  const res = await axios.get(`/application_companies/${id}`)
+
+  return res.data.applicationCompany as ApplicationCompany
+}
+
+export const deleteApplicationCompany = async (id: string) => {
+  await axios.delete(`/application_companies/${id}`)
 }

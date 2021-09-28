@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Button } from '../atom/Button'
 import { FaPencilAlt, FaTrash } from 'react-icons/fa'
 import { color } from '../../utils/color'
+import { ApplicationCompany } from '../../app/services/applicationService'
 
 const datas = [{
   key: 999,
@@ -44,28 +45,36 @@ const TextDetailContainer = styled.div`
 `
 
 const StatusText = styled.span<{ status: string }>`
-  color: ${({ status }) => status === 'approved' ? color.lightGreen : status === 'rejected' ? color.red : color.yellow};
+  color: ${({ status }) => status === '承諾' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
   font-weight: 700;
 `
 
 type iIntroducerStatusDetailPage = {
+  applicationCompany: ApplicationCompany
+  deleteApplication: () => void
 }
 
 export const IntroducerStatusDetailPage: React.FC<iIntroducerStatusDetailPage> = ({
+  applicationCompany,
+  deleteApplication
 }) => {
-
-
-
   return (
     <IntroducerStatusDetailPageContainer>
       <TextDetailContainer>
-        <h3 className="project-title">株式会社○○○○</h3>
-        <p className="concept">
-          アピールアピールアピールアピールアピールアピールアピールアピールアピール
-          アピールアピールアピールアピールアピール
-        </p>
+        <h3 className="project-title">{applicationCompany.name}</h3>
+        <h3>詳細</h3>
+        <p className="concept">{applicationCompany.detail}</p>
+        
+        <h3>紹介理由</h3>
+        <p className="concept">{applicationCompany.reason}</p>
 
-        <p>紹介状態：<StatusText status="approved">承諾</StatusText></p>
+        <p>営業先担当者の名前： {applicationCompany.contact_name}</p>
+        <p>営業先担当者のメールアドレス： {applicationCompany.contact_email}</p>
+        <p>営業先担当者の電話番号： {applicationCompany.phone_number}</p>
+
+        <p>掲載者の承諾状態：<StatusText status={applicationCompany.status_project}>{applicationCompany.status_project}</StatusText></p>
+        <p>紹介された企業の承諾状態：<StatusText status={applicationCompany.status_worker}>{applicationCompany.status_worker}</StatusText></p>
+
       </TextDetailContainer>
       <Button
         height="40px"
@@ -83,6 +92,7 @@ export const IntroducerStatusDetailPage: React.FC<iIntroducerStatusDetailPage> =
         margin="20px 0 0 0"
         backgroundColor={color.red}
         color={color.white}
+        onClick={deleteApplication}
       >
         取り消し
       </Button>

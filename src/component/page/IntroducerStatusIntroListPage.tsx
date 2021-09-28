@@ -1,27 +1,9 @@
 import React from 'react'
-import { Select } from 'antd'
 import styled from 'styled-components'
 import { color } from '../../utils/color'
-import { FcPlus } from 'react-icons/fc'
 import { Card } from '../atom/Card'
 import { ApplicationCompany } from '../../app/services/applicationService'
 import { useHistory } from 'react-router'
-
-const datas = [{
-  key: 999,
-  name: '株式会社○○',
-  appeal: 'この会社はすごくて、とりあえずすごい！',
-  status: 'approved'
-}]
-
-for (let i = 0; i < 3; i++) {
-  datas.push({
-    key: i,
-    name: '株式会社○○',
-    appeal: 'この会社はすごくて、とりあえずすごい！',
-    status: i % 3 === 0 ? 'approved' : i % 2 === 0 ? 'pending' : 'rejected'
-  })
-}
 
 const IntroducerSearchContainer = styled.div`
   display: flex;
