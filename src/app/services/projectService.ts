@@ -7,7 +7,7 @@ export type Project = {
   name: string
   status: string
   concept: string
-  deadline: Date
+  deadline?: Date
   reward: string
   created_at: Date
   updated_at: Date
@@ -31,4 +31,16 @@ export const searchProjects = async (category: string) => {
   const res = await axios.get(`/projects/search?category=${category}`)
 
   return res.data.projects as Project[]
+}
+
+export const createProject = async(project: Project) => {
+  const res = await axios.post('/projects/', {
+    name: project.name,
+    concept: project.concept,
+    deadline: project.deadline,
+    reward: project.reward,
+    category: project.category
+  })
+
+  return res.data.project as Project
 }

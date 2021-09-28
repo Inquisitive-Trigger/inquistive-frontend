@@ -67,7 +67,7 @@ export const SearcherListPage: React.FC<iSearcherListPage> = ({
         ))}
       </CardContainer>
 
-      <PlusButton>
+      <PlusButton onClick={() => history.push("/searcher/create")}>
         <FcPlus/> 新規案件
       </PlusButton>
       
