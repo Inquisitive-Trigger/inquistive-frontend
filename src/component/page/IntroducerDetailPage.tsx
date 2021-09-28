@@ -62,31 +62,26 @@ export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
       </DetailContainer>
       <DetailContainer>
         <label>活動をお願いしたい方</label>
-        <div>{project.wish_person || "飲食業界とつながりがある方"}</div>
+        <div>{project.wish_person}</div>
       </DetailContainer>
       <DetailContainer>
         <label>商談成立報酬の目安</label>
-        <div>{project.reward}</div>
+        <div>{Number(project.reward) * 0.005}</div>
       </DetailContainer>
       <DetailContainer>
         <label>このサービスの強み</label>
-        <div>{project.appeal || "飲食業界で発生する非効率なアナログの顧客体験の研究をDXを用いて改善します"}</div>
+        <div>{project.appeal}</div>
       </DetailContainer>
       <DetailContainer>
         <label>企業概要</label>
-        <div>{"所在地：青森県"}</div>
-        <div>{"従業員：10名"}</div>
+        <div>{project.company_info}</div>
       </DetailContainer>
       <DetailContainer>
         <label>会社ホームページのURL</label>
-        <div>{"https://chiho-chusho.com"}</div>
+        <div>{project.company_url}</div>
       </DetailContainer>
       <DetailContainer> <label>状態</label>
         <div>{project.status}</div>
-      </DetailContainer>
-      <DetailContainer>
-        <label>掲載期限</label>
-        <div>{moment(project.deadline).format('YYYY年MM月DD日')}</div>
       </DetailContainer>
       <DetailContainer>
         <label>業種</label>
