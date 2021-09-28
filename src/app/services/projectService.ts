@@ -20,3 +20,9 @@ export const fetchProjectList = async() => {
 
   return res.data.projects as Project[]
 }
+
+export const searchProjects = async (category: string) => {
+  const res = await axios.get(`/projects/search?category=${category}`)
+
+  return res.data.projects as Project[]
+}

@@ -3,7 +3,6 @@ import { fetchProjectList, Project } from '../../app/services/projectService'
 import IntroducerListPage from '../../component/page/IntroducerListPage'
 import { toast } from 'react-toastify'
 
-
 export const IntroducerListPageContainer = () => {
   const [projects, setProjects] = React.useState([] as Project[])
 
