@@ -6,6 +6,7 @@ import { useParams } from 'react-router'
 import { Button } from '../atom/Button'
 import { Card } from '../atom/Card'
 import { Input } from '../atom/Input'
+import { ApplicationCompanyForm, Project } from '../../app/services/projectService'
 
 const InputGroup = styled.div`
   width: 90%;
@@ -68,10 +69,45 @@ const CardContainer = styled.div`
 `
 
 type iIntroducerIntroducePage = {
+  project: Project
+  onApply: (applicationCompanyForm: ApplicationCompanyForm) => void
 }
 
 export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
+  project,
+  onApply
 }) => {
+  const [applicationForm, setApplicationForm] = React.useState<ApplicationCompanyForm>({
+    name: '',
+    detail: '',
+    reason: '',
+    contactEmail: '',
+    contactName: '',
+    phoneNumber: '',
+    projectId: 0
+  })
+
+
+  const handleChangeText = React.useCallback(
+    e => {
+      const name = e.currentTarget.name
+      const value = e.currentTarget.value
+
+      setApplicationForm({
+        ...applicationForm,
+        [name]: value
+      })
+    },
+    [applicationForm]
+  )
+
+  const handleSubmit = React.useCallback(
+    () => {
+      onApply({...applicationForm, projectId: project.id})
+    },
+    [onApply, applicationForm, project]
+  )
+
   return (
     <IntroducerIntroduceContainer>
       <Header>
@@ -80,48 +116,64 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
 
       <CardContainer>
         <CardLabel>対象案件</CardLabel>
-        <Card>
-          <p className="company-name">株式会社○○</p>
-          <h3 className="project-title">新事業立ち上げ</h3>
-          <p className="concept">新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です</p>
+        <Card width="100%">
+          <p className="company-name">{project.company_name}</p>
+          <h3 className="project-title">{project.name}</h3>
+          <p className="concept">{project.concept}</p>
         </Card>
       </CardContainer>
 
       <InputGroup>
-        <label htmlFor="companyName">企業名</label>
+        <label htmlFor="name">企業名</label>
         <Input
           placeholder="株式会社○○"
-          name="companyName"
-          id="companyName"
+          name="name"
+          id="name"
+          onChange={handleChangeText}
         />
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="email">企業の概念</label>
+        <label htmlFor="detail">企業の概念</label>
         <Input.TextArea
           placeholder="株式会社○○○○はサーバ・インフラの専門会社でとても
           優秀な会社"
-          name="email"
-          id="email"
+          name="detail"
+          id="detail"
           rows={8}
+          onChange={handleChangeText}
         />
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="contact-name">営業先担当者名前</label>
+        <label htmlFor="reason">紹介する理由</label>
+        <Input.TextArea
+          placeholder="株式会社○○○○はサーバ・インフラの専門会社でとても
+          優秀な会社"
+          name="reason"
+          id="reason"
+          rows={8}
+          onChange={handleChangeText}
+        />
+      </InputGroup>
+
+      <InputGroup>
+        <label htmlFor="contactName">営業先担当者名前</label>
         <Input
           placeholder="太郎二郎"
-          name="contact-name"
-          id="contact-name"
+          name="contactName"
+          id="contactName"
+          onChange={handleChangeText}
         />
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="email">営業先担当者メールアドレス</label>
+        <label htmlFor="contactEmail">営業先担当者メールアドレス</label>
         <Input
           placeholder="user@email.com"
-          name="email"
-          id="email"
+          name="contactEmail"
+          id="contactEmail"
+          onChange={handleChangeText}
         />
       </InputGroup>
       
@@ -132,6 +184,7 @@ export const IntroducerIntroducePage: React.FC<iIntroducerIntroducePage> = ({
         width="90%"
         maxWidth="1080px"
         margin="20px 0"
+        onClick={handleSubmit}
       >
         企業を紹介する
       </Button>

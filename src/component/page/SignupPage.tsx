@@ -75,7 +75,7 @@ export const SignupPage:React.FC<iSignupPage> = ({
     type: false
   })
 
-  const [isDisabledSubmit, setIsDisabledSubmit] = React.useState(false)
+  const [isDisabledSubmit, setIsDisabledSubmit] = React.useState(true)
   
   const handleChangeText = React.useCallback(
     e => {
