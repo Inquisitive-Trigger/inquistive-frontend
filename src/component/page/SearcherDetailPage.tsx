@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { Button } from '../atom/Button'
 import { FaPencilAlt, FaTrash } from 'react-icons/fa'
 import { color } from '../../utils/color'
+import { Project } from '../../app/services/projectService'
+import { useHistory } from 'react-router'
 
 const datas = [{
   key: 999,
@@ -63,11 +65,13 @@ const Toolbox = styled.div`
 `
 
 type iSearcherDetailPage = {
+  project: Project
 }
 
 export const SearcherDetailPage: React.FC<iSearcherDetailPage> = ({
+  project
 }) => {
-
+  const history = useHistory()
   return (
     <SearcherDetailContainer>
       <Toolbox>
@@ -76,11 +80,12 @@ export const SearcherDetailPage: React.FC<iSearcherDetailPage> = ({
       </Toolbox>
 
       <TextDetailContainer>
-        <p className="company-name">株式会社○○</p>
-        <h3 className="project-title">新事業立ち上げ</h3>
-        <p className="concept">新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です</p>
+        <p className="company-name">{project.company_name}</p>
+        <h3 className="project-title">{project.name}</h3>
+        <p className="concept">{project.concept}</p>
       </TextDetailContainer>
       <Button
+        onClick={() => history.push("/searcher/list")}
         height="40px"
         width="90%"
         maxWidth="1080px"
