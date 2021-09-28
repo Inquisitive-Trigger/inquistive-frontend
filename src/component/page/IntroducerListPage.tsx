@@ -1,6 +1,6 @@
 import React from 'react'
 import Topbar from '../atom/Topbar'
-import { Select } from 'antd'
+import { Button, Select } from 'antd'
 import styled from 'styled-components'
 import { color } from '../../utils/color'
 import { Project } from '../../app/services/projectService'
@@ -124,6 +124,8 @@ const IntroducerListPage: React.FC<iIntroducerListPage> = ({
           </Card>
         ))}
       </CardContainer>
+      <Button onClick={() => history.push("/signin")}>ログイン</Button>
+      <Button onClick={() => history.push("/signup")}>新規登録</Button>
       
     </IntroducerListContainer>
   )
