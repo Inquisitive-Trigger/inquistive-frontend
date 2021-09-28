@@ -7,7 +7,7 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import IntroducerListPageContainer from '../container/page/IntroducerListPageContainer'
+import { IntroducerListPageContainer }from '../container/page/IntroducerListPageContainer'
 import { IntroducerSearchPageContainer } from '../container/page/IntroducerSearchPageContainer'
 import { IntroducerDetailPageContainer } from '../container/page/IntroducerDetailPageContainer'
 import { IntroducerIntroducePageContainer } from '../container/page/IntroducerIntroducePageContainer'

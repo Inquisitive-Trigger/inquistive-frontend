@@ -3,24 +3,10 @@ import Topbar from '../atom/Topbar'
 import { Select } from 'antd'
 import styled from 'styled-components'
 import { color } from '../../utils/color'
+import { Project } from '../../app/services/projectService'
+import { useHistory } from 'react-router'
 
 const { Option } = Select
-
-const datas = [{
-  key: 999,
-  companyName: '株式会社○○',
-  projectName: '新事業立ち上げ',
-  concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-}]
-
-for (let i = 0; i < 30; i++) {
-  datas.push({
-    key: i,
-    companyName: '株式会社○○',
-    projectName: '新事業立ち上げ',
-    concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-  })
-}
 
 const IntroducerListContainer = styled.div`
   width: 100vw;
@@ -96,15 +82,27 @@ const Card = styled.div`
 
   }
 `
+type iIntroducerListPage = {
+  projects: Project[]
+}
 
-const IntroducerListPage = () => {
+const IntroducerListPage: React.FC<iIntroducerListPage> = ({
+  projects
+}) => {
+  const history = useHistory()
+
+  const handleCategoryChange = React.useCallback(
+    value => {
+      history.push(`/introducer/project/search/${value}`)
+    },
+    [history]
+  )
+
   return (
     <IntroducerListContainer>
       <InputGroup>
         <label htmlFor="email">案件業種</label>
-        <Select
-          defaultValue="trading"
-        >
+        <Select onChange={handleCategoryChange}>
           <Option value="manufacturer">メーカー</Option>
           <Option value="trading">商社</Option>
           <Option value="distribution">流通・小売</Option>
@@ -118,11 +116,11 @@ const IntroducerListPage = () => {
 
       <SectionHeader>最新案件</SectionHeader>
       <CardContainer>
-        {datas.map(data => (
-          <Card key={data.key}>
-            <p className="company-name">{data.companyName}</p>
-            <h3 className="project-title">{data.projectName}</h3>
-            <p className="concept">{data.concept}</p>
+        {projects.map(project => (
+          <Card key={project.id}>
+            <p className="company-name">{project.company_name}</p>
+            <h3 className="project-title">{project.name}</h3>
+            <p className="concept">{project.concept}</p>
           </Card>
         ))}
       </CardContainer>
