@@ -11,8 +11,12 @@ import axios from 'axios'
 import { SigninPageContainer } from './container/page/SigninPageContainer'
 import 'antd/dist/antd.css'
 import { SignupPageContainer } from './container/page/SignupPageContainer'
+import { IntroducerListPageContainer }from './container/page/IntroducerListPageContainer'
+import { IntroducerDetailPageContainer } from './container/page/IntroducerDetailPageContainer'
+import { IntroducerSearchPageContainer } from './container/page/IntroducerSearchPageContainer'
 import { IntroducerRoutes } from './routes/IntroducerRoutes'
 import { SearcherRoutes } from './routes/SearcherRoutes'
+import Topbar from './component/atom/Topbar'
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -94,8 +98,20 @@ const App = () => {
             <Route path="/signup">
               <SignupPageContainer />
             </Route>
+            <Route path="/introducer/project/list">
+              <Topbar />
+              <IntroducerListPageContainer />
+            </Route>
+            <Route path="/introducer/project/search/:category">
+              <Topbar />
+              <IntroducerSearchPageContainer />
+            </Route>
+            <Route path="/introducer/project/detail/:id">
+              <Topbar />
+              <IntroducerDetailPageContainer />
+            </Route>
             <Route path="/">
-              <Redirect to="/signin" />
+              <Redirect to="/introducer/project/list" />
             </Route>
           </Switch>
           }
