@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Button } from '../atom/Button'
-import { FaPencilAlt, FaTrash } from 'react-icons/fa'
 import { color } from '../../utils/color'
+import { ApplicationCompany } from '../../app/services/applicationService'
 
 const datas = [{
   key: 999,
@@ -49,26 +49,27 @@ const StatusText = styled.span<{ status: string }>`
 `
 
 type iSearcherIntroduceDetailPage = {
+  application: ApplicationCompany
+  handleApprove: () => void
+  handleDeny: () => void
 }
 
 export const SearcherIntroduceDetailPage: React.FC<iSearcherIntroduceDetailPage> = ({
+  application,
+  handleApprove,
+  handleDeny
 }) => {
-
-
-
   return (
     <SearcherIntroduceDetailContainer>
       <TextDetailContainer>
-        <h3 className="project-title">株式会社○○○○</h3>
-        <p className="concept">
-          アピールアピールアピールアピールアピールアピールアピールアピールアピール
-          アピールアピールアピールアピールアピール
-        </p>
+        <h3 className="project-title">{application.name}</h3>
+        <p className="concept">{application.reason}</p>
 
-        <p>紹介社：<b>ペンギン</b></p>
-        <p>紹介状態：<StatusText status="approved">承諾</StatusText></p>
+        <p>紹介者：<b>{application.author?.name}</b></p>
+        <p>紹介状態：<StatusText status="approved">{application.status_project}</StatusText></p>
       </TextDetailContainer>
       <Button
+        onClick={handleApprove}
         height="40px"
         width="90%"
         maxWidth="1080px"
@@ -80,6 +81,7 @@ export const SearcherIntroduceDetailPage: React.FC<iSearcherIntroduceDetailPage>
       </Button>
 
       <Button
+        onClick={handleDeny}
         height="40px"
         width="90%"
         maxWidth="1080px"

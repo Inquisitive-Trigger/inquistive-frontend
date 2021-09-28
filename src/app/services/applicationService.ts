@@ -35,3 +35,23 @@ export const fetchApplicationCompanies = async () => {
 
   return res.data.applicationCompanies as ApplicationCompany[]
 }
+
+export const fetchApplicationCompany = async (id: string) => {
+  const res = await axios.get(`/application_companies/${id}`)
+  console.log(res.data)
+
+  return res.data.applicationCompany as ApplicationCompany
+}
+
+export const approveApplicationComapny = async (id: string) => {
+  const res = await axios.post(`/application_companies/${id}/project_approvals`)
+  console.log(res.data)
+
+  return res.data.applicationCompany as ApplicationCompany
+}
+
+export const denyApplicationComapny = async (id: string) => {
+  const res = await axios.post(`/application_companies/${id}/project_denials`)
+
+  return res.data.applicationCompany as ApplicationCompany
+}
