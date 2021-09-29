@@ -15,10 +15,15 @@ export type ChatRows = {
   chat: React.ReactNode
 }
 
-export const ChatPageContainer = () => {
+type iChatPageContainer = {
+  socket: React.RefObject<WebSocket>
+}
+
+export const ChatPageContainer: React.FC<iChatPageContainer> = ({
+  socket
+}) => {
   const currentUser = useAppSelector(selectUser)
 
-  const socket = React.useRef<WebSocket>(null)
   const [isConnected, setIsConnected] = React.useState(false)
   const [members, setMembers] = React.useState<string[]>([])
   const [users, setUsers] = React.useState<User[]>([])

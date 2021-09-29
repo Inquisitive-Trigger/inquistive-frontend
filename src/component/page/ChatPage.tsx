@@ -8,8 +8,10 @@ import { Input } from '../atom/Input'
 import { SearcherTopbar } from '../atom/SearcherTopbar'
 import { AiOutlineClose } from 'react-icons/ai'
 import { BiUserCircle } from 'react-icons/bi'
+import { sleep } from '../../utils/tools'
+import { BiChevronLeft } from 'react-icons/bi'
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ animation: string }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -18,6 +20,33 @@ const Overlay = styled.div`
   min-height: 100vh;
   background-color: ${color.white};
   z-index: 5;
+  animation: ${({ animation }) => animation === 'in' ?
+    'slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both' :
+    animation === 'out' && 'slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
+  };
+  
+  @keyframes slide-in-top {
+    0% {
+      transform: translateY(-1000px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out-top {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-1000px);
+      opacity: 0;
+    }
+  }
+
 `
 
 const OuterContainer = styled.div`
@@ -30,6 +59,7 @@ const OuterContainer = styled.div`
 const ChatContainer = styled.div`
   width: 90%;
   max-width: 1080px;
+  margin-top: 30px;
 `
 
 const ChatHeader = styled.div`
@@ -64,7 +94,7 @@ const ChatList = styled.div`
   width: calc(100% - 20px);
   padding: 20px 0;
   border-bottom: 1px solid ${color.lightGray};
-  border-top: 1px solid ${color.lightGray};
+  cursor: pointer;
 
   & .name {
     font-weight: 700;
@@ -132,6 +162,7 @@ export const ChatPage: React.FC<iChatPage> = ({
   onCloseOverlay
 }) => {
   const [draft, setDraft] = React.useState('')
+  const [animation, setAnimation] = React.useState('in')
 
   const onSendChat = React.useCallback(
     () => {
@@ -140,18 +171,26 @@ export const ChatPage: React.FC<iChatPage> = ({
     [draft, chatWith]
   )
 
+  const handleCloseOverlay = React.useCallback(
+    async () => {
+      setAnimation('out')
+      await sleep(500)
+      onCloseOverlay()
+    },
+    [onCloseOverlay]
+  )
+
   return <>
-    <StyledChatIconContainer onClick={onCloseOverlay}>
-      <AiOutlineClose />
-    </StyledChatIconContainer>
-    <Overlay>
+    <Overlay animation={animation} onAnimationEnd={() => { setAnimation('none') }}>
       {
         chatWith ? (
         <>
-          <SearcherTopbar />
           <OuterContainer>
             <ChatContainer>
-              <ChatHeader>{chatWith!.name}</ChatHeader>
+              <ChatHeader>
+                <BiChevronLeft />
+                {chatWith!.name}
+              </ChatHeader>
               <ChatBody>{currentChats.map(chat => chat.chat)}</ChatBody>
 
               <ChatInputContainer>
@@ -174,7 +213,9 @@ export const ChatPage: React.FC<iChatPage> = ({
         </>
         ) :
         (<>
-          <SearcherTopbar />
+          <StyledChatIconContainer onClick={handleCloseOverlay}>
+            <AiOutlineClose />
+          </StyledChatIconContainer>
           <OuterContainer>
             <ChatListContainer>
               {knownUsers.map(user =>

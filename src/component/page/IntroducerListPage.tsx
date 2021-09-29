@@ -85,7 +85,6 @@ const IntroducerListPage: React.FC<iIntroducerListPage> = ({
   return (
     <IntroducerListContainer>
       {isAuth && <>
-        <Button onClick={() => history.push("/introducer/connections")}>つながりのある企業を見る</Button>
         <IntroducerTab />
       </>}
 
