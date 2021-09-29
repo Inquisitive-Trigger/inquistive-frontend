@@ -101,10 +101,20 @@ export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
         height="40px"
         width="90%"
         maxWidth="1080px"
-        margin="40px 0 0 0"
+        margin="40px 0 20px 0"
         onClick={() => history.push(`/introducer/project/${[project.id]}/introduce`)}
       >
         企業を紹介する
+      </Button>
+
+      <Button
+        height="40px"
+        width="90%"
+        maxWidth="1080px"
+        margin="0 0 20px 0"
+        onClick={() => history.push(`/introducer/project/list`)}
+      >
+        案件一覧に戻る
       </Button>
     </IntroducerDetailContainer>
   )

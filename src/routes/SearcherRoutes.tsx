@@ -9,7 +9,6 @@ import {
 } from 'react-router-dom'
 import { SearcherListPageContainer } from '../container/page/SearcherListPageContainer'
 import { SearcherDetailPageContainer } from '../container/page/SearcherDetailPageContainer'
-import { SearcherTopbar } from '../component/atom/SearcherTopbar'
 import { SearcherCreatePageContainer } from '../container/page/SearcherCreatePageContainer'
 import { SearcherIntroduceListPageContainer } from '../container/page/SearcherIntroduceListPageContainer'
 import { SearcherIntroduceDetailPageContainer } from '../container/page/SearcherIntroduceDetailPageContainer'
@@ -17,7 +16,7 @@ import { SearcherIntroduceDetailPageContainer } from '../container/page/Searcher
 export const SearcherRoutes = () => {
   return (
     <div>
-      <SearcherTopbar />
+      <Topbar />
       <Switch>
         <Route path="/searcher/create">
           <SearcherCreatePageContainer />

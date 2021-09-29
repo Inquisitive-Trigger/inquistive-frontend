@@ -2,13 +2,17 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { color } from '../../utils/color'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { Button } from './Button'
 import { AiFillFile } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
+import { logout, selectIsAuth } from '../../app/slices/userSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import Cookies from 'js-cookie'
 
 const TopbarContainer = styled.div`
   width: 100%;
-  height: 100px;
+  height: 60px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -24,21 +28,22 @@ const TitleContainer = styled.span`
   width: 90%;
   max-width: 1080px;
   text-align: left;
+  margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+
+  & button {
+    font-size: 12px;
+    padding: 0 20px;
+    box-shadow: 0 0 0 0 #444;
+  }
 `
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 180px;
-
-  & > button {
-    font-size: 12px;
-    padding: 0 20px;
-    box-shadow: 0 0 0 0 #444;
-  }
 `
 
 const Title = styled.div`
@@ -69,20 +74,49 @@ const StyledLink = styled(Link)<{ isSelected: boolean }>`
 
 const Topbar = () => {
   const location = useLocation()
+  const history = useHistory()
+  const dispatch = useAppDispatch()
+  
+  const isAuth = useAppSelector(selectIsAuth)
+
+  const handleLogout = React.useCallback(
+    () => {
+      dispatch(logout())
+      Cookies.remove('token')
+    },
+    [dispatch]
+  )
 
   return (
     <TopbarContainer>
       <TitleContainer>
-        <Title>Inquisitive</Title>
-        <ButtonContainer>
-          <Button backgroundColor={color.darkGreen}>ログイン</Button>
-          <Button backgroundColor={color.darkGreen}>新規登録</Button>
-        </ButtonContainer>
+        <Title>Culty</Title>
+          {
+            isAuth ? <Button
+              backgroundColor={color.darkGreen}
+              onClick={handleLogout}
+            >
+              ログアウト
+            </Button> : <ButtonContainer>
+              <Button
+                backgroundColor={color.darkGreen}
+                onClick={() => history.push("/signin")}
+              >
+                ログイン
+              </Button>
+              <Button
+                backgroundColor={color.darkGreen}
+                onClick={() => history.push("/signup")}
+              >
+                新規登録
+              </Button>
+            </ButtonContainer>
+          }
       </TitleContainer>
-      <TabContainer>
+      {/* <TabContainer>
         <StyledLink to="/introducer/home" isSelected={location.pathname.includes('project')}>Project</StyledLink>
         <StyledLink to="/introducer/status" isSelected={location.pathname.includes('status')}>Status</StyledLink>
-      </TabContainer>
+      </TabContainer> */}
     </TopbarContainer>
   )
 }

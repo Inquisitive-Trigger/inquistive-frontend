@@ -116,7 +116,7 @@ export const SignupPage:React.FC<iSignupPage> = ({
 
   return (
     <SigninWrapper>
-      <Title>Inquisitive</Title>
+      <Title>Culty</Title>
       <InputGroup>
         <label htmlFor="email">メールアドレス</label>
         <Input

@@ -7,7 +7,8 @@ export const Card = styled.div<{
   margin?: string,
   height?: string,
   width?: string,
-  maxWidth?: string
+  maxWidth?: string,
+  animationDelay?: number
 }>`
   border: 1px solid ${color.lightGray};
   margin: ${({ margin }) => margin ? margin : '10px 0'};
@@ -16,6 +17,8 @@ export const Card = styled.div<{
   max-width: 500px;
   width: ${({ width }) => width ? width : '90%'};
   cursor: pointer;
+  animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  ${({ animationDelay }) => animationDelay && `animation-delay: ${animationDelay * 150}ms;`}
 
   & > .company-name {
 
@@ -24,9 +27,22 @@ export const Card = styled.div<{
   & > .project-title {
     font-weight: 700;
     font-size: 20px;
+    color: ${color.darkGreen};
   }
 
   & > .concept {
 
   }
+
+  @keyframes slide-left {
+    0% {
+      -webkit-transform: translateX(500px);
+              transform: translateX(500px);
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+  }
+
 `
