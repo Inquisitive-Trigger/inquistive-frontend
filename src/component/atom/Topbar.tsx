@@ -35,7 +35,7 @@ const TitleContainer = styled.span`
 
   & button {
     font-size: 12px;
-    padding: 0 20px;
+    padding: 3px 20px;
     box-shadow: 0 0 0 0 #444;
   }
 `
