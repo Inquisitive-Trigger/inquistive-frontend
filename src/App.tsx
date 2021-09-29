@@ -23,10 +23,12 @@ import 'react-toastify/dist/ReactToastify.css'
 import Cookies from 'js-cookie'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import { authenticateUser, selectIsAuth, selectUser } from './app/slices/userSlice'
+import { ChatPageContainer } from './container/page/ChatPageContainer'
 
 axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
 
 const App = () => {
+  const [isLoading, setIsLoading] = React.useState(true)
   const isAuth = useAppSelector(selectIsAuth)
   const user = useAppSelector(selectUser)
   const dispatch = useAppDispatch()
@@ -48,29 +50,35 @@ const App = () => {
 
             dispatch(authenticateUser({
               user: {
+                id: data.id,
                 name: data.name,
                 email: data.email,
                 type: data.purpose ? 'introducer' : 'searcher'
               },
               isAuth: true
             }))
-
           }
         } catch (err) {
           console.error(err)
+        } finally {
+          setIsLoading(false)
         }
       })()
     },
     []
   )
 
-  return (
+  return isLoading ? <div>Loading</div> : (
     <>
       <ToastContainer />
       <Router>
         {isAuth ? 
           user.type === 'introducer' ? (
             <Switch>
+              <Route path="/chat">
+                <ChatPageContainer />
+              </Route>
+
               <Route path="/introducer">
                 <IntroducerRoutes />
               </Route>
@@ -81,6 +89,10 @@ const App = () => {
             </Switch>
           ) : (
             <Switch>
+              <Route path="/chat">
+                <ChatPageContainer />
+              </Route>
+
               <Route path="/searcher">
                 <SearcherRoutes />
               </Route>

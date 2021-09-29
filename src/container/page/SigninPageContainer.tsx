@@ -27,6 +27,7 @@ export const SigninPageContainer = () => {
         // Set To Redux
         dispatch(authenticateUser({
           user: {
+            id: user.id,
             name: user.name,
             email: user.email,
             type: user.purpose ? 'introducer' : 'searcher'

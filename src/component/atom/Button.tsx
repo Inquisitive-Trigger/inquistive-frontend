@@ -7,13 +7,15 @@ export const Button = styled.button<{
   margin?: string,
   height?: string,
   width?: string,
-  maxWidth?: string
+  maxWidth?: string,
+  padding?: string
 }>`
   border-radius: 15px;
   border: 0;
   ${({ color }) => color && `color: ${color};`}
   ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`}
   ${({ margin }) => margin && `margin: ${margin};`}
+  ${({ padding }) => padding && `padding: ${padding};`}
   ${({ height }) => height && `height: ${height};`}
   ${({ width }) => width && `width: ${width};`}
   ${({ maxWidth }) => maxWidth && `max-width: ${maxWidth};`}

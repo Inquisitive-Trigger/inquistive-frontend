@@ -3,6 +3,7 @@ import { RootState } from '../store'
 
 export interface UserState {
   user: {
+    id: number,
     name: string,
     email: string,
     type: string
@@ -12,6 +13,7 @@ export interface UserState {
 
 const initialState: UserState = {
   user: {
+    id: 999,
     name: '',
     email: '',
     type: ''
