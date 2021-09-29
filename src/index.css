@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	scrollbar-width: thin !important;
+	
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -43,4 +44,15 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: lightgray;
 }
