@@ -12,8 +12,16 @@ import { SearcherDetailPageContainer } from '../container/page/SearcherDetailPag
 import { SearcherCreatePageContainer } from '../container/page/SearcherCreatePageContainer'
 import { SearcherIntroduceListPageContainer } from '../container/page/SearcherIntroduceListPageContainer'
 import { SearcherIntroduceDetailPageContainer } from '../container/page/SearcherIntroduceDetailPageContainer'
+import { SearcherDesignatePageContainer } from '../container/page/SearcherDesignatePageContainer'
+import { ChatRows } from '../App'
 
-export const SearcherRoutes = () => {
+type iSearcherRoutes = {
+  socket: React.RefObject<WebSocket>
+  chatRows: ChatRows[]
+  setChatRows: (chatRows: ChatRows[]) => void
+}
+
+export const SearcherRoutes: React.FC<iSearcherRoutes> = ({ socket, chatRows, setChatRows }) => {
   return (
     <div>
       <Topbar />
@@ -32,6 +40,10 @@ export const SearcherRoutes = () => {
 
         <Route path="/searcher/project/:id/introduce">
           <SearcherIntroduceListPageContainer />
+        </Route>
+
+        <Route path="/searcher/project/:id/designate">
+          <SearcherDesignatePageContainer socket={socket} chatRows={chatRows} setChatRows={setChatRows} />
         </Route>
 
         <Route path="/searcher/project/:id">

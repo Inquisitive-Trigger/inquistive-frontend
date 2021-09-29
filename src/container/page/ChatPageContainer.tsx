@@ -6,29 +6,25 @@ import { ChatIcon } from '../../component/organism/ChatIcon'
 import { ChatPage } from '../../component/page/ChatPage'
 import { fetchIntroducerConnections } from '../../app/services/userService'
 import { toast } from 'react-toastify'
+import { ChatRows } from '../../App'
 
 
 const URL = 'wss://j6rwmmhnl5.execute-api.ap-northeast-1.amazonaws.com/production'
 
-export type ChatRows = {
-  with: number,
-  chat: React.ReactNode
-}
-
 type iChatPageContainer = {
   socket: React.RefObject<WebSocket>
+  chatRows: ChatRows[]
+  setChatRows: (chatRows: ChatRows[]) => void
 }
 
 export const ChatPageContainer: React.FC<iChatPageContainer> = ({
-  socket
+  socket, chatRows, setChatRows
 }) => {
   const currentUser = useAppSelector(selectUser)
 
   const [isConnected, setIsConnected] = React.useState(false)
   const [members, setMembers] = React.useState<string[]>([])
   const [users, setUsers] = React.useState<User[]>([])
-
-  const [chatRows, setChatRows] = React.useState<ChatRows[]>([])
 
   const [currentChats, setCurrentChats] = React.useState<ChatRows[]>([])
   const [chatWith, setChatWith] = React.useState<User | undefined>(undefined)
@@ -87,6 +83,7 @@ export const ChatPageContainer: React.FC<iChatPageContainer> = ({
 
       if (data.privateMessage) {
         const message = data.privateMessage
+        // @ts-ignore
         setChatRows(oldArray => [
           ...oldArray, {
           with: message.with,
@@ -170,6 +167,7 @@ export const ChatPageContainer: React.FC<iChatPageContainer> = ({
       }))
 
       // Chat Rows
+      // @ts-ignore
       setChatRows(oldArray => [
         ...oldArray, {
           with: to,

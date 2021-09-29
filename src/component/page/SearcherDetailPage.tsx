@@ -85,6 +85,15 @@ export const SearcherDetailPage: React.FC<iSearcherDetailPage> = ({
         <p className="concept">{project.concept}</p>
       </TextDetailContainer>
       <Button
+        onClick={() => history.push(`/searcher/project/${project.id}/designate`)}
+        height="40px"
+        width="90%"
+        maxWidth="1080px"
+        margin="40px 0 0 0"
+      >
+        ユーザーを指名して紹介してもらう
+      </Button>
+      <Button
         onClick={() => history.push(`/searcher/project/${project.id}/introduce`)}
         height="40px"
         width="90%"
