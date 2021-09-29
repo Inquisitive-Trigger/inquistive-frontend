@@ -52,9 +52,6 @@ export const SearcherListPage: React.FC<iSearcherListPage> = ({
 
   return (
     <IntroducerSearchContainer>
-      <PlusButton onClick={() => history.push("/searcher/connections")}>
-         つながりのあるユーザーを見る
-      </PlusButton>
       <SectionHeader>実行中案件</SectionHeader>
       <CardContainer>
         {projects.map((project, index) => (

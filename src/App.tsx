@@ -32,6 +32,7 @@ const App = () => {
   const isAuth = useAppSelector(selectIsAuth)
   const user = useAppSelector(selectUser)
   const dispatch = useAppDispatch()
+  const socket = React.useRef<WebSocket>(null)
 
   React.useEffect(
     () => {
@@ -74,7 +75,7 @@ const App = () => {
       <Router>
         {isAuth ? 
           user.type === 'introducer' ? (<>
-            <ChatPageContainer />
+            <ChatPageContainer socket={socket} />
             
             <Switch>
               <Route path="/introducer">
@@ -87,13 +88,9 @@ const App = () => {
             </Switch>
           </>
           ) : (<>
-            <ChatPageContainer />
+            <ChatPageContainer socket={socket}/>
 
             <Switch>
-              <Route path="/chat">
-                <ChatPageContainer />
-              </Route>
-
               <Route path="/searcher">
                 <SearcherRoutes />
               </Route>

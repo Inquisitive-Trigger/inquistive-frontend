@@ -12,7 +12,6 @@ import { SearcherDetailPageContainer } from '../container/page/SearcherDetailPag
 import { SearcherCreatePageContainer } from '../container/page/SearcherCreatePageContainer'
 import { SearcherIntroduceListPageContainer } from '../container/page/SearcherIntroduceListPageContainer'
 import { SearcherIntroduceDetailPageContainer } from '../container/page/SearcherIntroduceDetailPageContainer'
-import { SearcherConnectionsPageContainer } from '../container/page/SearcherConnectionsPageContainer'
 import { SearcherDesignatePageContainer } from '../container/page/SearcherDesignatePageContainer'
 
 export const SearcherRoutes = () => {
@@ -20,9 +19,6 @@ export const SearcherRoutes = () => {
     <div>
       <Topbar />
       <Switch>
-        <Route path="/searcher/connections">
-          <SearcherConnectionsPageContainer />
-        </Route>
         <Route path="/searcher/create">
           <SearcherCreatePageContainer />
         </Route>
