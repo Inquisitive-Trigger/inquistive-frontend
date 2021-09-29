@@ -61,14 +61,17 @@ const CardContainer = styled.div`
   justify-content: center;
   margin-top: 15px;
   max-width: 1080px;
+  width: 100%;
 `
 
 type iIntroducerListPage = {
   projects: Project[]
+  isAuth: boolean
 }
 
 const IntroducerListPage: React.FC<iIntroducerListPage> = ({
-  projects
+  projects,
+  isAuth
 }) => {
   const history = useHistory()
 
@@ -81,8 +84,10 @@ const IntroducerListPage: React.FC<iIntroducerListPage> = ({
 
   return (
     <IntroducerListContainer>
-      <Button onClick={() => history.push("/introducer/connections")}>つながりのある企業を見る</Button>
-      <IntroducerTab />
+      {isAuth && <>
+        <Button onClick={() => history.push("/introducer/connections")}>つながりのある企業を見る</Button>
+        <IntroducerTab />
+      </>}
 
       <InputGroup>
         <label htmlFor="email">案件業種</label>

@@ -73,12 +73,10 @@ const App = () => {
       <ToastContainer />
       <Router>
         {isAuth ? 
-          user.type === 'introducer' ? (
+          user.type === 'introducer' ? (<>
+            <ChatPageContainer />
+            
             <Switch>
-              <Route path="/chat">
-                <ChatPageContainer />
-              </Route>
-
               <Route path="/introducer">
                 <IntroducerRoutes />
               </Route>
@@ -87,7 +85,10 @@ const App = () => {
                 <Redirect to="/introducer" />
               </Route>
             </Switch>
-          ) : (
+          </>
+          ) : (<>
+            <ChatPageContainer />
+
             <Switch>
               <Route path="/chat">
                 <ChatPageContainer />
@@ -101,7 +102,7 @@ const App = () => {
                 <Redirect to="/searcher" />
               </Route>
             </Switch>
-          )
+          </>)
         :
           <Switch>
             <Route path="/signin">

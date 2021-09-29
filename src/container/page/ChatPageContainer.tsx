@@ -1,8 +1,12 @@
 import * as React from 'react'
 import { useAppSelector } from '../../app/hooks'
-import { User } from '../../app/services/userService'
+import { fetchSearcherConnections, User } from '../../app/services/userService'
 import { selectUser } from '../../app/slices/userSlice'
+import { ChatIcon } from '../../component/organism/ChatIcon'
 import { ChatPage } from '../../component/page/ChatPage'
+import { fetchIntroducerConnections } from '../../app/services/userService'
+import { toast } from 'react-toastify'
+
 
 const URL = 'wss://j6rwmmhnl5.execute-api.ap-northeast-1.amazonaws.com/production'
 
@@ -23,6 +27,30 @@ export const ChatPageContainer = () => {
 
   const [currentChats, setCurrentChats] = React.useState<ChatRows[]>([])
   const [chatWith, setChatWith] = React.useState<User | undefined>(undefined)
+
+  const [isShowing, setIsShowing] = React.useState(false)
+  const [knownUsers, setKnownUsers] = React.useState([] as User[])
+
+  React.useEffect(
+    () => {
+      (async () => {
+        try {
+          if (currentUser.type === 'introducer') {
+            const users = await fetchIntroducerConnections()
+            setKnownUsers(users)
+          }
+
+          if (currentUser.type === 'searcher') {
+            const users = await fetchSearcherConnections()
+            setKnownUsers(users)
+          }
+        } catch {
+          toast.error('つながりのある企業一覧取得が失敗しました')
+        }
+      })()
+    },
+    []
+  )
 
 
   const onSocketOpen = React.useCallback(
@@ -154,15 +182,19 @@ export const ChatPageContainer = () => {
     [isConnected]
   )
 
-  return (
+  return isShowing ? (
     <ChatPage
       isConnected={isConnected}
-      users={users}
+      onlineUsers={users}
+      knownUsers={knownUsers}
       currentChats={currentChats}
       onEnterChat={onEnterChat}
       onExitChat={onExitChat}
       onPrivateMessage={onSendPrivateMessage}
       chatWith={chatWith}
+      onCloseOverlay={() => setIsShowing(false)}
     />
+  ) : (
+    <ChatIcon onClick={() => setIsShowing(true)}/>
   )
 }
