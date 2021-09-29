@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createEmptyUser } from '../services/userService'
 import { RootState } from '../store'
 
 export interface UserState {
@@ -30,11 +31,20 @@ export const userSlice = createSlice({
       const { user, isAuth } = action.payload
       state.user = user
       state.isAuth = isAuth
+    },
+    logout: (state) => {
+      state.user = {
+        id: 999,
+        name: '',
+        email: '',
+        type: ''
+      }
+      state.isAuth = false
     }
   },
 })
 
-export const { authenticateUser } = userSlice.actions
+export const { authenticateUser, logout } = userSlice.actions
 
 export const selectUser = (state: RootState) => state.userModule.user
 export const selectIsAuth = (state: RootState) => state.userModule.isAuth

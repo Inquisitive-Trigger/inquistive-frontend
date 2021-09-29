@@ -4,6 +4,8 @@ import { color } from '../../utils/color'
 import { Card } from '../atom/Card'
 import { ApplicationCompany } from '../../app/services/applicationService'
 import { useHistory } from 'react-router'
+import { IntroducerTab } from '../atom/IntroducerTab'
+import { IoMdClipboard } from 'react-icons/io'
 
 const IntroducerSearchContainer = styled.div`
   display: flex;
@@ -19,9 +21,25 @@ const CardContainer = styled.div`
   width: 100%;
 `
 
-const StatusText = styled.p<{ status: string }>`
-  color: ${({ status }) => status === 'approved' ? color.lightGreen : status === 'rejected' ? color.red : color.yellow};
+const ProjectInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  & > .icon {
+    font-size: 24px;
+    margin-right: 10px;
+    line-height: 0;
+  }
+`
+
+const StatusText = styled.span<{ status: string }>`
+  color: ${color.white};
+  background-color: ${({ status }) => status === '承諾' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
   font-weight: 700;
+  font-size: 14px;
+  margin-right: 10px;
+  padding: 4px 8px;
+  border-radius: 12px;
 `
 
 type iIntroducerStatusIntroListPage = {
@@ -33,29 +51,26 @@ export const IntroducerStatusIntroListPage: React.FC<iIntroducerStatusIntroListP
 }) => {
   const history = useHistory()
 
-  const generateStatus = React.useCallback(
-    (status: string) => {
-      if (status === 'approved') { return '承諾' }
-      if (status === 'rejected') { return '拒否' }
-
-      return '返答待ち'
-    },
-    []
-  )
-
   return (
     <IntroducerSearchContainer>
+      <IntroducerTab />
       <CardContainer>
-        {applicationCompanies.map(data => (
+        {applicationCompanies.map((data, index) => (
           <Card
             key={data.id}
             margin="8px 20px"
+            animationDelay={index}
             onClick={() => history.push(`/introducer/status/${data.id}`)}
           >
-            <StatusText status={data.status_project}>{generateStatus(data.status_project)}</StatusText>
-            <h3 className="project-title">{data.name}</h3>
+            <h3 className="project-title">
+              <StatusText status={data.status_project}>{data.status_project}</StatusText>
+              {data.name}
+            </h3>
             <p className="concept">{data.detail}</p>
-            <p>紹介先：{data.project.name}</p>
+            <ProjectInfoContainer>
+              <span className="icon"><IoMdClipboard /></span>
+              {data.project.name}
+            </ProjectInfoContainer>
           </Card>
         ))}
       </CardContainer>

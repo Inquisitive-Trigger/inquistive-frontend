@@ -25,7 +25,7 @@ const Title = styled.div`
 export const SearcherTopbar = () => {
   return (
     <TopbarContainer>
-      <Title>Inquisitive</Title>
+      <Title>Culty</Title>
     </TopbarContainer>
   )
 }

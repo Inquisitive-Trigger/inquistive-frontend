@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import { color } from '../../utils/color'
 import { Project } from '../../app/services/projectService'
 import { useHistory } from 'react-router'
+import { Card } from '../atom/Card'
+import { IntroducerTab } from '../atom/IntroducerTab'
 
 const { Option } = Select
 
@@ -61,27 +63,6 @@ const CardContainer = styled.div`
   max-width: 1080px;
 `
 
-const Card = styled.div`
-  border: 1px solid gray;
-  margin: 8px 20px;
-  padding: 10px 15px;
-  border-radius: 25px;
-  max-width: 500px;
-
-
-  & > .company-name {
-
-  }
-
-  & > .project-title {
-    font-weight: 700;
-    font-size: 20px;
-  }
-
-  & > .concept {
-
-  }
-`
 type iIntroducerListPage = {
   projects: Project[]
 }
@@ -101,9 +82,11 @@ const IntroducerListPage: React.FC<iIntroducerListPage> = ({
   return (
     <IntroducerListContainer>
       <Button onClick={() => history.push("/introducer/connections")}>つながりのある企業を見る</Button>
+      <IntroducerTab />
+
       <InputGroup>
         <label htmlFor="email">案件業種</label>
-        <Select onChange={handleCategoryChange}>
+        <Select onChange={handleCategoryChange} placeholder="カテゴリを選択してください">
           <Option value="manufacturer">メーカー</Option>
           <Option value="trading">商社</Option>
           <Option value="distribution">流通・小売</Option>
@@ -117,17 +100,14 @@ const IntroducerListPage: React.FC<iIntroducerListPage> = ({
 
       <SectionHeader>最新案件</SectionHeader>
       <CardContainer>
-        {projects.map(project => (
-          <Card key={project.id} onClick={() => history.push(`/introducer/project/detail/${project.id}`)}>
+        {projects.map((project, index) => (
+          <Card key={project.id} animationDelay={index} onClick={() => history.push(`/introducer/project/detail/${project.id}`)}>
             <p className="company-name">{project.company_name}</p>
             <h3 className="project-title">{project.name}</h3>
             <p className="concept">{project.concept}</p>
           </Card>
         ))}
       </CardContainer>
-      <Button onClick={() => history.push("/signin")}>ログイン</Button>
-      <Button onClick={() => history.push("/signup")}>新規登録</Button>
-      
     </IntroducerListContainer>
   )
 }

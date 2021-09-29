@@ -67,7 +67,7 @@ export const SigninPage: React.FC<iSigninPage> = ({
 
   return (
     <SigninWrapper>
-      <Title>Inquisitive</Title>
+      <Title>Culty</Title>
       <Input
         placeholder="メールアドレス"
         size="large"

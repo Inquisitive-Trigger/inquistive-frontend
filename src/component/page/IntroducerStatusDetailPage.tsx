@@ -6,22 +6,6 @@ import { color } from '../../utils/color'
 import { ApplicationCompany } from '../../app/services/applicationService'
 import { useHistory } from 'react-router'
 
-const datas = [{
-  key: 999,
-  companyName: '株式会社○○',
-  projectName: '新事業立ち上げ',
-  concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-}]
-
-for (let i = 0; i < 30; i++) {
-  datas.push({
-    key: i,
-    companyName: '株式会社○○',
-    projectName: '新事業立ち上げ',
-    concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-  })
-}
-
 const IntroducerStatusDetailPageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,6 +34,30 @@ const StatusText = styled.span<{ status: string }>`
   font-weight: 700;
 `
 
+const OverviewContainer = styled.div`
+  width: 90%;
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+
+  & > .project-title {
+    font-weight: 700;
+    font-size: 20px;
+  }
+`
+
+const DetailContainer = styled.div`
+  width: 90%;
+  max-width: 1080px;
+  margin-top: 20px;
+  line-height: 2;
+
+  & > label {
+    color: ${color.darkGreen};
+    font-weight: 900;
+  }
+`
+
 type iIntroducerStatusDetailPage = {
   applicationCompany: ApplicationCompany
   deleteApplication: () => void
@@ -64,26 +72,50 @@ export const IntroducerStatusDetailPage: React.FC<iIntroducerStatusDetailPage> =
   return (
     <IntroducerStatusDetailPageContainer>
       <TextDetailContainer>
-        <h3 className="project-title">{applicationCompany.name}</h3>
-        <h3>詳細</h3>
-        <p className="concept">{applicationCompany.detail}</p>
+        <OverviewContainer>
+          <h3 className="project-title">{applicationCompany.name}</h3>
+        </OverviewContainer>
         
-        <h3>紹介理由</h3>
-        <p className="concept">{applicationCompany.reason}</p>
+        <DetailContainer>
+          <label>詳細</label>
+          <div>{applicationCompany.detail}</div>
+        </DetailContainer>
 
-        <p>営業先担当者の名前： {applicationCompany.contact_name}</p>
-        <p>営業先担当者のメールアドレス： {applicationCompany.contact_email}</p>
-        <p>営業先担当者の電話番号： {applicationCompany.phone_number}</p>
+        <DetailContainer>
+          <label>紹介理由</label>
+          <div>{applicationCompany.reason}</div>
+        </DetailContainer>
 
-        <p>掲載者の承諾状態：<StatusText status={applicationCompany.status_project}>{applicationCompany.status_project}</StatusText></p>
-        <p>紹介された企業の承諾状態：<StatusText status={applicationCompany.status_worker}>{applicationCompany.status_worker}</StatusText></p>
+        <DetailContainer>
+          <label>営業先担当者の名前</label>
+          <div>{applicationCompany.contact_name}</div>
+        </DetailContainer>
 
+        <DetailContainer>
+          <label>営業先担当者のメールアドレス</label>
+          <div>{applicationCompany.contact_email}</div>
+        </DetailContainer>
+
+        <DetailContainer>
+          <label>営業先担当者の電話番号</label>
+          <div>{applicationCompany.phone_number}</div>
+        </DetailContainer>
+
+        <DetailContainer>
+          <label>掲載者の承諾状態</label>
+          <div>{applicationCompany.status_project}</div>
+        </DetailContainer>
+
+        <DetailContainer>
+          <label>紹介された企業の承諾状態</label>
+          <div>{applicationCompany.status_worker}</div>
+        </DetailContainer>
       </TextDetailContainer>
       <Button
         height="40px"
         width="90%"
         maxWidth="1080px"
-        margin="40px 0 0 0"
+        margin="40px 0 20px 0"
         onClick={() => history.push(`/introducer/status/${applicationCompany.id}/edit`)}
       >
         編集
@@ -93,12 +125,22 @@ export const IntroducerStatusDetailPage: React.FC<iIntroducerStatusDetailPage> =
         height="40px"
         width="90%"
         maxWidth="1080px"
-        margin="20px 0 0 0"
+        margin="0 0 20px 0"
         backgroundColor={color.red}
         color={color.white}
         onClick={deleteApplication}
       >
         取り消し
+      </Button>
+
+      <Button
+        height="40px"
+        width="90%"
+        maxWidth="1080px"
+        margin="0 0 20px 0"
+        onClick={() => history.push('/introducer/status')}
+      >
+        紹介一覧に戻る
       </Button>
     </IntroducerStatusDetailPageContainer>
   )

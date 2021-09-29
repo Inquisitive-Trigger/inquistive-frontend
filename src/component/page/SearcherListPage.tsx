@@ -57,10 +57,11 @@ export const SearcherListPage: React.FC<iSearcherListPage> = ({
       </PlusButton>
       <SectionHeader>実行中案件</SectionHeader>
       <CardContainer>
-        {projects.map(project => (
+        {projects.map((project, index) => (
           <Card
             key={project.id}
             margin="8px 20px"
+            animationDelay={index}
             onClick={() => history.push(`/searcher/project/${project.id}`)}
           >
             <p className="company-name">{project.company_name}</p>
