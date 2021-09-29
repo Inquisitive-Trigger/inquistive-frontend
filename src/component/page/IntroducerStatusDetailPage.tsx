@@ -30,7 +30,7 @@ const TextDetailContainer = styled.div`
 `
 
 const StatusText = styled.span<{ status: string }>`
-  color: ${({ status }) => status === '承諾' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
+  color: ${({ status }) => status === '承認' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
   font-weight: 700;
 `
 
@@ -102,12 +102,12 @@ export const IntroducerStatusDetailPage: React.FC<iIntroducerStatusDetailPage> =
         </DetailContainer>
 
         <DetailContainer>
-          <label>掲載者の承諾状態</label>
+          <label>掲載者の承認状態</label>
           <div>{applicationCompany.status_project}</div>
         </DetailContainer>
 
         <DetailContainer>
-          <label>紹介された企業の承諾状態</label>
+          <label>紹介された企業の承認状態</label>
           <div>{applicationCompany.status_worker}</div>
         </DetailContainer>
       </TextDetailContainer>

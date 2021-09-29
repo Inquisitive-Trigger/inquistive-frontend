@@ -5,22 +5,6 @@ import { color } from '../../utils/color'
 import { ApplicationCompany } from '../../app/services/applicationService'
 import moment from 'moment'
 
-const datas = [{
-  key: 999,
-  companyName: '株式会社○○',
-  projectName: '新事業立ち上げ',
-  concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-}]
-
-for (let i = 0; i < 30; i++) {
-  datas.push({
-    key: i,
-    companyName: '株式会社○○',
-    projectName: '新事業立ち上げ',
-    concept: '新事業立ち上げのためにサーバ・インフラする会社を探しています。期間は２年間です'
-  })
-}
-
 const SearcherIntroduceDetailContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,7 +41,7 @@ const DetailContainer = styled.div`
 `
 
 const StatusText = styled.span<{ status: string }>`
-  color: ${({ status }) => status === '承諾' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
+  color: ${({ status }) => status === '承認' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
   font-weight: 700;
 `
 
@@ -109,7 +93,7 @@ export const SearcherIntroduceDetailPage: React.FC<iSearcherIntroduceDetailPage>
         backgroundColor={color.lightGreen}
         color={color.white}
       >
-        承諾
+        承認
       </Button>
 
       <Button

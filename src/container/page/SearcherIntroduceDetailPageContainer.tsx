@@ -32,8 +32,9 @@ export const SearcherIntroduceDetailPageContainer = () => {
     try {
       const applicationCompany = await approveApplicationComapny(params.introduceid)
       setApplication(applicationCompany)
+      toast.success('紹介の承認が成功しました')
     } catch {
-      toast.error('紹介の承諾が失敗しました')
+      toast.error('紹介の承認が失敗しました')
     }
   }
 
@@ -42,7 +43,7 @@ export const SearcherIntroduceDetailPageContainer = () => {
       const applicationCompany = await denyApplicationComapny(params.introduceid)
       setApplication(applicationCompany)
     } catch {
-      toast.error('紹介の承諾が失敗しました')
+      toast.error('紹介の承認が失敗しました')
     }
   }
 

@@ -97,7 +97,7 @@ export const IntroducerStatusPage: React.FC<iIntroducerStatusPage> = ({
             <h3 className="project-title">{data.projectName}</h3>
             <p className="concept">{data.concept}</p>
             <StatusIconContainer className="approved">
-              <AiFillCheckCircle /> 承諾 {data.approved} 件
+              <AiFillCheckCircle /> 承認 {data.approved} 件
             </StatusIconContainer>
             <StatusIconContainer className="pending">
               <AiFillMinusCircle /> 返答待ち {data.pending} 件

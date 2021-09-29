@@ -31,7 +31,7 @@ const CardContainer = styled.div`
 
 const StatusText = styled.span<{ status: string }>`
   color: ${color.white};
-  background-color: ${({ status }) => status === '承諾' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
+  background-color: ${({ status }) => status === '承認' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
   font-weight: 700;
   font-size: 14px;
   margin-right: 10px;
