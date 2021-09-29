@@ -6,9 +6,11 @@ import { SigninPage } from '../../component/page/SigninPage'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '../../app/hooks'
 import { authenticateUser } from '../../app/slices/userSlice'
+import { useHistory } from 'react-router'
 
 export const SigninPageContainer = () => {
   const dispatch = useAppDispatch()
+  const history = useHistory()
 
   const handleSubmit = React.useCallback(
     async (signinForm: iSigninForm) => {
@@ -36,9 +38,15 @@ export const SigninPageContainer = () => {
         }))
 
         // Notify
-        toast.success('登録が成功しました')
+        toast.success('ログインが成功しました')
+
+        // Redirect
+        if (Cookies.get('redirect')) {
+          history.push(Cookies.get('redirect')!)
+          Cookies.remove('redirect')
+        }
       } catch {
-        toast.error('登録が失敗しました')
+        toast.error('ログインが失敗しました')
       }
     },
     []

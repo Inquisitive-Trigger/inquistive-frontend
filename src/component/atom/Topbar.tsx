@@ -38,6 +38,7 @@ const TitleContainer = styled.span`
     padding: 3px 20px;
     box-shadow: 0 0 0 0 #444;
   }
+
 `
 
 const ButtonContainer = styled.div`
@@ -47,29 +48,14 @@ const ButtonContainer = styled.div`
 `
 
 const Title = styled.div`
-  font-size: 20px;
-`
-const TabContainer = styled.div`
-  width: 100%;
   display: flex;
-  margin-top: 8px;
-  justify-content: space-around;
-  background-color: ${color.white};
-`
+  align-items: center;
+  font-size: 20px;
 
-const StyledLink = styled(Link)<{ isSelected: boolean }>`
-  color: ${color.white};
-  padding: 5px 15px;
-  border-radius: 15px;
-  ${({ isSelected }) => isSelected && `background-color: ${color.darkGreen};`}
-
-  &:link {
-    color: ${color.white};
+  & img {
+    width: 25px;
+    margin-right: 10px;
   }
-
-  &:visited {
-    color: ${color.white};
-  } 
 `
 
 const Topbar = () => {
@@ -90,7 +76,10 @@ const Topbar = () => {
   return (
     <TopbarContainer>
       <TitleContainer>
-        <Title>Culty</Title>
+        <Title onClick={() => history.push('/')}>
+          <img src="https://culty-icon.s3.ap-northeast-1.amazonaws.com/culty.png" />
+          Culty
+        </Title>
           {
             isAuth ? <Button
               backgroundColor={color.darkGreen}
@@ -113,10 +102,6 @@ const Topbar = () => {
             </ButtonContainer>
           }
       </TitleContainer>
-      {/* <TabContainer>
-        <StyledLink to="/introducer/home" isSelected={location.pathname.includes('project')}>Project</StyledLink>
-        <StyledLink to="/introducer/status" isSelected={location.pathname.includes('status')}>Status</StyledLink>
-      </TabContainer> */}
     </TopbarContainer>
   )
 }

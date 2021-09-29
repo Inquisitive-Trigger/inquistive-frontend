@@ -143,7 +143,7 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
       <InputGroup>
         <label htmlFor="email">案件業種</label>
         <Select
-          defaultValue="trading"
+          defaultValue="メーカー"
           onSelect={e => setProject({ ...project, category: e })}
         >
           <Option value="メーカー">メーカー</Option>

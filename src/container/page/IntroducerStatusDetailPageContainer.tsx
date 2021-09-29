@@ -3,6 +3,8 @@ import { useHistory, useParams } from 'react-router'
 import { createEmptyApplicationCompany, deleteApplicationCompany, fetchApplicationCompany } from '../../app/services/applicationService'
 import { IntroducerStatusDetailPage } from '../../component/page/IntroducerStatusDetailPage'
 import { toast } from 'react-toastify'
+import { useAppSelector } from '../../app/hooks'
+import { selectIsAuth } from '../../app/slices/userSlice'
 
 export const IntroducerStatusDetailPageContainer = () => {
   const [applicationCompany, setApplicationCompany] = React.useState(createEmptyApplicationCompany())

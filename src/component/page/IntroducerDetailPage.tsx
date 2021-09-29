@@ -5,6 +5,7 @@ import { color } from '../../utils/color'
 import { Button } from '../atom/Button'
 import moment from 'moment'
 import { useHistory } from 'react-router'
+import { BsFillLockFill } from 'react-icons/bs'
 
 const IntroducerDetailContainer = styled.div`
   display: flex;
@@ -43,10 +44,14 @@ const DetailContainer = styled.div`
 
 type iIntroducerDetailPage = {
   project: Project
+  isAuth: boolean
+  onIntroduce: () => void
 }
 
 export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
-  project
+  project,
+  isAuth,
+  onIntroduce
 }) => {
   const history = useHistory()
 
@@ -70,30 +75,30 @@ export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
       </DetailContainer>
       <DetailContainer>
         <label>このサービスの強み</label>
-        <div>{project.appeal}</div>
+        <div>{!isAuth ? <><BsFillLockFill/> ユーザー限定</> : project.appeal}</div>
       </DetailContainer>
       <DetailContainer>
         <label>企業概要</label>
-        <div>{project.company_info}</div>
+        <div>{!isAuth ? <><BsFillLockFill/> ユーザー限定</> : project.company_info}</div>
       </DetailContainer>
       <DetailContainer>
         <label>会社ホームページのURL</label>
-        <div>{project.company_url}</div>
+        <div>{!isAuth ? <><BsFillLockFill/> ユーザー限定</> : project.company_url}</div>
       </DetailContainer>
       <DetailContainer> <label>状態</label>
-        <div>{project.status}</div>
+        <div>{!isAuth ? <><BsFillLockFill/> ユーザー限定</> : project.status}</div>
       </DetailContainer>
       <DetailContainer>
         <label>業種</label>
-        <div>{project.category}</div>
+        <div>{!isAuth ? <><BsFillLockFill/> ユーザー限定</> : project.category}</div>
       </DetailContainer>
       <DetailContainer>
         <label>掲載日</label>
-        <div>{moment(project.created_at).format('YYYY年MM月DD日')}</div>
+        <div>{!isAuth ? <><BsFillLockFill/> ユーザー限定</> : moment(project.created_at).format('YYYY年MM月DD日')}</div>
       </DetailContainer>
       <DetailContainer>
         <label>最終更新日</label>
-        <div>{moment(project.updated_at).format('YYYY年MM月DD日')}</div>
+        <div>{!isAuth ? <><BsFillLockFill/> ユーザー限定</> : moment(project.updated_at).format('YYYY年MM月DD日')}</div>
       </DetailContainer>
       <Button
         backgroundColor={color.lightGreen}
@@ -102,9 +107,9 @@ export const IntroducerDetailPage: React.FC<iIntroducerDetailPage> = ({
         width="90%"
         maxWidth="1080px"
         margin="40px 0 20px 0"
-        onClick={() => history.push(`/introducer/project/${[project.id]}/introduce`)}
+        onClick={onIntroduce}
       >
-        企業を紹介する
+        {!isAuth ? 'ログインし、企業を紹介する' : '企業を紹介する'}
       </Button>
 
       <Button

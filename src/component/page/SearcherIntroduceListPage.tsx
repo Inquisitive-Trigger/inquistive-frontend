@@ -4,6 +4,7 @@ import { color } from '../../utils/color'
 import { Card } from '../atom/Card'
 import { ApplicationCompany } from '../../app/services/applicationService'
 import { useHistory } from 'react-router'
+import { Project } from '../../app/services/projectService'
 
 const IntroducerSearchContainer = styled.div`
   display: flex;
@@ -25,37 +26,53 @@ const CardContainer = styled.div`
   justify-content: center;
   margin-top: 15px;
   max-width: 1080px;
+  width: 100%;
 `
 
-const StatusText = styled.p<{ status: string }>`
-  color: ${({ status }) => status === 'approved' ? color.lightGreen : status === 'rejected' ? color.red : color.yellow};
+const StatusText = styled.span<{ status: string }>`
+  color: ${color.white};
+  background-color: ${({ status }) => status === '承諾' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
   font-weight: 700;
+  font-size: 14px;
+  margin-right: 10px;
+  padding: 4px 8px;
+  border-radius: 12px;
 `
+
+const EmptyMessageContainer = styled.div`
+  margin-top: 20px;
+  color: ${color.lightGray};
+`
+
 
 type iSearcherIntroduceListPage = {
   applications: ApplicationCompany[]
+  project: Project
 }
 
 export const SearcherIntroduceListPage: React.FC<iSearcherIntroduceListPage> = ({
-  applications
+  applications,
+  project
 }) => {
   const history = useHistory()
 
   return (
     <IntroducerSearchContainer>
-      <SectionHeader>"{applications.length !== 0 && applications[0].project.name}"の紹介一覧</SectionHeader>
+      <SectionHeader>"{project.name}"の紹介一覧</SectionHeader>
       <CardContainer>
-        {applications.length !== 0 && applications.map(application => (
-          <Card
+        {applications.length !== 0 ? applications.map(application => (
+          <Card 
             key={application.id}
             margin="8px 20px"
             onClick={() => history.push(`/searcher/project/${application.project.id}/introduce/${application.id}`)}
           >
-            <StatusText status={application.status_project}>{application.status_project}</StatusText>
-            <h3 className="project-title">{application.name}</h3>
+            <h3 className="project-title">
+              <StatusText status={application.status_project}>{application.status_project}</StatusText>
+              {application.name}
+            </h3>
             <p className="concept">{application.reason}</p>
           </Card>
-        ))}
+        )) : <EmptyMessageContainer>まだ紹介は届いていません。</EmptyMessageContainer>}
       </CardContainer>
     </IntroducerSearchContainer>
   )

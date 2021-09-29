@@ -65,7 +65,7 @@ type iIntroducerStatusDetailPage = {
 
 export const IntroducerStatusDetailPage: React.FC<iIntroducerStatusDetailPage> = ({
   applicationCompany,
-  deleteApplication
+  deleteApplication,
 }) => {
   const history = useHistory()
 

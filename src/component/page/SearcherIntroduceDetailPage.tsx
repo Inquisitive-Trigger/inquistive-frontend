@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Button } from '../atom/Button'
 import { color } from '../../utils/color'
 import { ApplicationCompany } from '../../app/services/applicationService'
+import moment from 'moment'
 
 const datas = [{
   key: 999,
@@ -31,7 +32,7 @@ const SearcherIntroduceDetailContainer = styled.div`
   }
 `
 
-const TextDetailContainer = styled.div`
+const OverviewContainer = styled.div`
   width: 90%;
   max-width: 1080px;
   display: flex;
@@ -43,8 +44,20 @@ const TextDetailContainer = styled.div`
   }
 `
 
+const DetailContainer = styled.div`
+  width: 90%;
+  max-width: 1080px;
+  margin-top: 20px;
+  line-height: 2;
+
+  & > label {
+    color: ${color.darkGreen};
+    font-weight: 900;
+  }
+`
+
 const StatusText = styled.span<{ status: string }>`
-  color: ${({ status }) => status === 'approved' ? color.lightGreen : status === 'rejected' ? color.red : color.yellow};
+  color: ${({ status }) => status === '承諾' ? color.lightGreen : status === '拒否' ? color.red : color.yellow};
   font-weight: 700;
 `
 
@@ -59,15 +72,34 @@ export const SearcherIntroduceDetailPage: React.FC<iSearcherIntroduceDetailPage>
   handleApprove,
   handleDeny
 }) => {
+
   return (
     <SearcherIntroduceDetailContainer>
-      <TextDetailContainer>
+      <OverviewContainer>
         <h3 className="project-title">{application.name}</h3>
         <p className="concept">{application.reason}</p>
+      </OverviewContainer>
 
-        <p>紹介者：<b>{application.author?.name}</b></p>
-        <p>紹介状態：<StatusText status="approved">{application.status_project}</StatusText></p>
-      </TextDetailContainer>
+      <DetailContainer>
+        <label>詳細</label>
+        <div>{application.detail}</div>
+      </DetailContainer>
+
+      {/* <DetailContainer>
+        <label>紹介者</label>
+        <div>{application.author.name}</div>
+      </DetailContainer> */}
+
+      <DetailContainer>
+        <label>掲載日</label>
+        <div>{moment(application.created_at).format('YYYY年MM月DD日')}</div>
+      </DetailContainer>
+
+      <DetailContainer>
+        <label>紹介状態</label>
+        <div><StatusText status={application.status_project}>{application.status_project}</StatusText></div>
+      </DetailContainer>
+
       <Button
         onClick={handleApprove}
         height="40px"

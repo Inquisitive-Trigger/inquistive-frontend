@@ -28,9 +28,18 @@ const SigninWrapper = styled.div`
 `
 
 const Title = styled.div`
+  width: 100%;
   font-size: 36px;
   font-weight: 600;
   color: ${color.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & img {
+    width: 40px;
+    margin-right: 15px;
+  }
 `
 
 type iSigninPage = {
@@ -67,7 +76,10 @@ export const SigninPage: React.FC<iSigninPage> = ({
 
   return (
     <SigninWrapper>
-      <Title>Culty</Title>
+      <Title>
+        <img src="https://culty-icon.s3.ap-northeast-1.amazonaws.com/culty.png" />
+        Culty
+      </Title>
       <Input
         placeholder="メールアドレス"
         size="large"

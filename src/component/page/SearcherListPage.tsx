@@ -24,6 +24,7 @@ const SectionHeader = styled.div`
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   justify-content: center;
   margin-top: 15px;
   max-width: 1080px;

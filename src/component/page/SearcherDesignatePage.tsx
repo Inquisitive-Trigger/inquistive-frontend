@@ -79,6 +79,8 @@ type iForm = {
 export const SearcherDesignatePage: React.FC<iSearcherDesignatesPage> = ({
   users, project, currentUser, handleSubmit 
 }) => {
+  const history = useHistory()
+
   const [form, setForm] = React.useState<iForm>({
     userId: -1,
     body: '' 
@@ -151,8 +153,19 @@ http://inquisitive-trigger-frontend-bucket.s3-website-ap-northeast-1.amazonaws.c
         width="90%"
         maxWidth="1080px"
         margin="40px 0 0 0"
+        backgroundColor={color.lightGreen}
+        color={color.white}
       >
         依頼する
+      </Button>
+      <Button
+        onClick={() => history.push(`/searcher/project/${project.id}`)}
+        height="40px"
+        width="90%"
+        maxWidth="1080px"
+        margin="20px 0 0 0"
+      >
+        案件詳細に戻る
       </Button>
     </SearcherConnectionsContainer>
   )
