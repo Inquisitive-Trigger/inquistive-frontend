@@ -10,6 +10,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { BiUserCircle } from 'react-icons/bi'
 import { sleep } from '../../utils/tools'
 import { BiChevronLeft } from 'react-icons/bi'
+import { IoPaperPlaneSharp } from 'react-icons/io5'
 
 const Overlay = styled.div<{ animation: string }>`
   position: fixed;
@@ -63,18 +64,33 @@ const ChatContainer = styled.div`
 `
 
 const ChatHeader = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 24px;
   font-weight: 700;
 `
 const ChatBody = styled.div`
-  height: calc(100vh - 200px);
+  height: calc(100vh - 150px);
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 
   & .send {
-    background-color: ${color.lightGreen};
+    display: inline-block;
+    border: 2px solid ${color.lightGreen};
+    align-self: flex-end;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
   }
 
-  & .recieve {
-    
+  & .receive {
+    display: inline-block;
+    border: 2px solid ${color.lightGray};
+    align-self: flex-start;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
   }
 `
 
@@ -138,6 +154,21 @@ const ProfileIconContainer = styled.div`
   font-size: 40px;
 `
 
+const BackIconContainer = styled.span`
+  font-size: 40px;
+  line-height: 0;
+  margin-right: 10px;
+`
+
+const SendIconContainer = styled.span`
+  font-size: 35px;
+  line-height: 0;
+  margin-left: 10px;
+  width: 90px;
+  text-align: center;
+  color: ${color.lightGreen};
+`
+
 type iChatPage = {
   isConnected: boolean
   onlineUsers: User[]
@@ -167,6 +198,7 @@ export const ChatPage: React.FC<iChatPage> = ({
   const onSendChat = React.useCallback(
     () => {
       onPrivateMessage(chatWith!.id, draft)
+      setDraft('')
     },
     [draft, chatWith]
   )
@@ -188,8 +220,8 @@ export const ChatPage: React.FC<iChatPage> = ({
           <OuterContainer>
             <ChatContainer>
               <ChatHeader>
-                <BiChevronLeft />
-                {chatWith!.name}
+                <BackIconContainer onClick={onExitChat}><BiChevronLeft /></BackIconContainer>
+                <span>{chatWith!.name}</span>
               </ChatHeader>
               <ChatBody>{currentChats.map(chat => chat.chat)}</ChatBody>
 
@@ -199,15 +231,12 @@ export const ChatPage: React.FC<iChatPage> = ({
                   value={draft}
                   onChange={e => { setDraft(e.currentTarget.value) }}
                 />
-                <Button
-                  backgroundColor={color.lightGreen}
-                  color={color.white}
-                  margin="0 0 0 10px"
+                <SendIconContainer
                   onClick={onSendChat}
-                >Send</Button>
+                >
+                  <IoPaperPlaneSharp />
+                </SendIconContainer>
               </ChatInputContainer>
-              
-              <Button onClick={onExitChat}>Back</Button>
             </ChatContainer>
           </OuterContainer>
         </>
