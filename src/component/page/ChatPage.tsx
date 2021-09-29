@@ -74,6 +74,7 @@ const ChatBody = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  overflow: auto;
 
   & .send {
     display: inline-block;
@@ -82,7 +83,7 @@ const ChatBody = styled.div`
     padding: 5px 10px;
     border-radius: 15px;
     margin-bottom: 10px;
-    animation: bounce-in-top 1.1s both;
+    animation: bounce-in-top 0.8s both;
   }
 
   & .receive {
@@ -92,7 +93,7 @@ const ChatBody = styled.div`
     padding: 5px 10px;
     border-radius: 15px;
     margin-bottom: 10px;
-    animation: bounce-in-top 0.5s both;
+    animation: bounce-in-top 0.8s both;
   }
 
   @keyframes bounce-in-top {
