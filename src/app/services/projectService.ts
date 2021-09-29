@@ -15,6 +15,8 @@ export type Project = {
   company_name: string
   wish_person: string
   appeal: string
+  company_info: string
+  company_url: string
 }
 
 export const createEmptyProject = () => ({
@@ -29,7 +31,9 @@ export const createEmptyProject = () => ({
   category: '',
   company_name: '',
   wish_person: '',
-  appeal: ''
+  appeal: '',
+  company_info: '',
+  company_url: ''
 }) 
 
 export const fetchProjectList = async() => {
@@ -54,8 +58,11 @@ export const createProject = async(project: Project) => {
   const res = await axios.post('/projects/', {
     name: project.name,
     concept: project.concept,
-    deadline: project.deadline,
+    appeal: project.appeal,
+    wish_person: project.wish_person,
     reward: project.reward,
+    company_info: project.company_info,
+    company_url: project.company_url,
     category: project.category
   })
 

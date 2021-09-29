@@ -72,7 +72,7 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
       <InputGroup>
         <label htmlFor="name">案件名</label>
         <Input
-          placeholder="スパープロジェクト"
+          placeholder="食品管理を自動化したい企業募集"
           name="name"
           id="name"
           onChange={e => setProject({ ...project, name: e.target.value })}
@@ -82,7 +82,7 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
       <InputGroup>
         <label htmlFor="concept">案件の概念</label>
         <Input.TextArea
-          placeholder="超人社会を作るプロジェクト"
+          placeholder="我々のサービスは食品業界の企業をターゲットに据え食品管理にかかるコストを下げるソリューションを最新のIT技術を用いて提案します。今回の案件では〇〇プラン以上にご登録いただけるような企業をご紹介いただきたいと考えています。"
           name="concept"
           id="concept"
           rows={8}
@@ -91,23 +91,52 @@ export const SearcherCreatePage: React.FC<iSearcherCreatePage> = ({
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="deadline">期限</label>
-        <DatePicker
-          placeholder="期限を選択してください"
-          name="deadline"
-          id="deadline"
-          size="large"
-          onChange={e => setProject({ ...project, deadline: e?.toDate() })}
+        <label htmlFor="appeal">サービスの強み</label>
+        <Input
+          placeholder="他社に比べ安価でサービスを提供しております。"
+          name="appeal"
+          id="appeal"
+          onChange={e => setProject({ ...project, appeal: e.target.value })}
         />
       </InputGroup>
 
       <InputGroup>
-        <label htmlFor="reward">報酬</label>
+        <label htmlFor="wish_person">活動をお願いしたい方</label>
         <Input
-          placeholder="300万円"
+          placeholder="食品業界に知り合いの多い方"
+          name="wish_person"
+          id="wish_person"
+          onChange={e => setProject({ ...project, wish_person: e.target.value })}
+        />
+      </InputGroup>
+
+      <InputGroup>
+        <label htmlFor="reward">平均取引金額</label>
+        <Input
+          placeholder="3000000"
           name="reward"
           id="reward"
           onChange={e => setProject({ ...project, reward: e.target.value })}
+        />
+      </InputGroup>
+
+      <InputGroup>
+        <label htmlFor="company_info">会社概要</label>
+        <Input
+          placeholder="本社は青森県にあり、従業員は10名程度です。"
+          name="company_info"
+          id="company_info"
+          onChange={e => setProject({ ...project, company_info: e.target.value })}
+        />
+      </InputGroup>
+
+      <InputGroup>
+        <label htmlFor="company_url">会社HPのURL</label>
+        <Input
+          placeholder="https://shokuhin-automation.co.jp"
+          name="company_url"
+          id="company_url"
+          onChange={e => setProject({ ...project, company_url: e.target.value })}
         />
       </InputGroup>
 
