@@ -63,3 +63,15 @@ export const registerUser = async ({
 
   return res.data
 }
+
+export const fetchSearcherConnections = async () => {
+  const res = await axios.get('/user/followings')
+
+  return res.data.users as User[]
+}
+
+export const fetchIntroducerConnections = async () => {
+  const res = await axios.get('/user/followers')
+
+  return res.data.users as User[]
+}

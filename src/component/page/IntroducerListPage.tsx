@@ -100,6 +100,7 @@ const IntroducerListPage: React.FC<iIntroducerListPage> = ({
 
   return (
     <IntroducerListContainer>
+      <Button onClick={() => history.push("/introducer/connections")}>つながりのある企業を見る</Button>
       <InputGroup>
         <label htmlFor="email">案件業種</label>
         <Select onChange={handleCategoryChange}>
