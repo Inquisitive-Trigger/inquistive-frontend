@@ -9,10 +9,10 @@ axios.defaults.baseURL = 'http://3.113.26.48/'
 export type User = {
   id: number
   name: string
-  email: string
-  created_at: Date
-  purpose: boolean
-  updated_at: Date
+  email?: string
+  created_at?: Date
+  purpose?: boolean
+  updated_at?: Date
 }
 
 export const createEmptyUser = () => ({
