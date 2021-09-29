@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { User } from '../../app/services/userService'
-import { ChatRows } from '../../container/page/ChatPageContainer'
+import { ChatRows } from '../../App'
 import { color } from '../../utils/color'
 import { Button } from '../atom/Button'
 import { Input } from '../atom/Input'

@@ -6,12 +6,49 @@ import { toast } from 'react-toastify'
 import { useParams } from 'react-router'
 import { useAppSelector } from '../../app/hooks'
 import { selectUser } from '../../app/slices/userSlice'
+import { ChatRows } from '../../App'
 
-export const SearcherDesignatePageContainer = () => {
+type iSearcherDesignatePageContainer = {
+  socket: React.RefObject<WebSocket>
+  chatRows: ChatRows[]
+  setChatRows: (chatRows: ChatRows[]) => void
+}
+
+export const SearcherDesignatePageContainer: React.FC<iSearcherDesignatePageContainer> = ({ socket, chatRows, setChatRows }) => {
   const [users, setUsers] = React.useState([] as User[])
   const [project, setProject] = React.useState({} as Project)
 
   const currentUser = useAppSelector(selectUser)
+
+  const onSendPrivateMessage = React.useCallback(
+    (to: number, message: string) => {
+      // Send to Socket
+      socket.current?.send(JSON.stringify({
+        action: 'sendPrivate',
+        message,
+        to,
+        from: currentUser.id
+      }))
+
+      // Chat Rows
+      // @ts-ignore
+      setChatRows(oldArray => [
+        ...oldArray, {
+          with: to,
+          chat: <div className="send">{message}</div>
+        }])    
+    },
+    [currentUser]
+  )
+
+  const handleSubmit = (to: number, message: string) => {
+    try {
+      onSendPrivateMessage(to, message)
+      toast.success('案件依頼が成功しました')
+    } catch {
+      toast.error('案件依頼が失敗しました')
+    }
+  }
 
   const params: { id: string } = useParams()
 
@@ -43,5 +80,12 @@ export const SearcherDesignatePageContainer = () => {
     []
   )
 
-  return <SearcherDesignatePage users={users} project={project} currentUser={currentUser} />
+  return (
+    <SearcherDesignatePage
+      users={users}
+      project={project}
+      currentUser={currentUser}
+      handleSubmit={handleSubmit}
+    />
+  )
 }

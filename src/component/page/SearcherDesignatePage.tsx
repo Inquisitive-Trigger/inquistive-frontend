@@ -68,6 +68,7 @@ type iSearcherDesignatesPage  ={
   users: User[]
   project: Project
   currentUser: User
+  handleSubmit: (to: number, message: string) => void
 }
 
 type iForm = {
@@ -76,7 +77,7 @@ type iForm = {
 }
 
 export const SearcherDesignatePage: React.FC<iSearcherDesignatesPage> = ({
-  users, project, currentUser 
+  users, project, currentUser, handleSubmit 
 }) => {
   const [form, setForm] = React.useState<iForm>({
     userId: -1,
@@ -145,7 +146,7 @@ http://inquisitive-trigger-frontend-bucket.s3-website-ap-northeast-1.amazonaws.c
         />
       </InputGroup>
       <Button
-        onClick={() => {}}
+        onClick={() => handleSubmit(form.userId, form.body)}
         height="40px"
         width="90%"
         maxWidth="1080px"

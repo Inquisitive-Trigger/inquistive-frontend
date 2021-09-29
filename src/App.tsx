@@ -27,12 +27,18 @@ import { ChatPageContainer } from './container/page/ChatPageContainer'
 
 axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
 
+export type ChatRows = {
+  with: number,
+  chat: React.ReactNode
+}
+
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(true)
   const isAuth = useAppSelector(selectIsAuth)
   const user = useAppSelector(selectUser)
   const dispatch = useAppDispatch()
   const socket = React.useRef<WebSocket>(null)
+  const [chatRows, setChatRows] = React.useState<ChatRows[]>([])
 
   React.useEffect(
     () => {
@@ -75,7 +81,7 @@ const App = () => {
       <Router>
         {isAuth ? 
           user.type === 'introducer' ? (<>
-            <ChatPageContainer socket={socket} />
+            <ChatPageContainer socket={socket} chatRows={chatRows} setChatRows={setChatRows} />
             
             <Switch>
               <Route path="/introducer">
@@ -88,11 +94,11 @@ const App = () => {
             </Switch>
           </>
           ) : (<>
-            <ChatPageContainer socket={socket}/>
+            <ChatPageContainer socket={socket} chatRows={chatRows} setChatRows={setChatRows}/>
 
             <Switch>
               <Route path="/searcher">
-                <SearcherRoutes />
+                <SearcherRoutes socket={socket} chatRows={chatRows} setChatRows={setChatRows} />
               </Route>
 
               <Route path="/">
